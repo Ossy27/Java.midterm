@@ -1,0 +1,2712 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مراجعة برمجة الحاسوب 1 - Java | 115 سؤال تفاعلي</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Cairo for Arabic UI & JetBrains Mono for Java Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Cairo', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'Consolas', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Scrollbar & Utility Styles */
+    body {
+      font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Java Syntax Highlighting Tokens (Dark & Light Mode) */
+    .code-block {
+      font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+      direction: ltr;
+      text-align: left;
+      tab-size: 4;
+      line-height: 1.65;
+    }
+
+    /* Dark Mode Syntax Colors */
+    .dark .tok-keyword { color: #c084fc; font-weight: 600; }   /* purple-400 */
+    .dark .tok-type    { color: #38bdf8; font-weight: 600; }   /* sky-400 */
+    .dark .tok-string  { color: #34d399; }                     /* emerald-400 */
+    .dark .tok-number  { color: #fbbf24; }                     /* amber-400 */
+    .dark .tok-comment { color: #64748b; font-style: italic; } /* slate-500 */
+    .dark .tok-method  { color: #60a5fa; }                     /* blue-400 */
+    .dark .tok-op      { color: #f472b6; }                     /* pink-400 */
+    .dark .tok-blank   {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fcd34d;
+      border: 1px dashed #f59e0b;
+      padding: 0 6px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Light Mode Syntax Colors */
+    html:not(.dark) .tok-keyword { color: #7c3aed; font-weight: 600; } /* violet-600 */
+    html:not(.dark) .tok-type    { color: #0284c7; font-weight: 600; } /* sky-600 */
+    html:not(.dark) .tok-string  { color: #059669; }                   /* emerald-600 */
+    html:not(.dark) .tok-number  { color: #d97706; }                   /* amber-600 */
+    html:not(.dark) .tok-comment { color: #94a3b8; font-style: italic; }
+    html:not(.dark) .tok-method  { color: #2563eb; }                   /* blue-600 */
+    html:not(.dark) .tok-op      { color: #db2777; }                   /* pink-600 */
+    html:not(.dark) .tok-blank   {
+      background: rgba(245, 158, 11, 0.14);
+      color: #b45309;
+      border: 1px dashed #d97706;
+      padding: 0 6px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    /* Popover Animation */
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateY(6px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .popover-animate {
+      animation: popIn 0.16s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Custom selection highlight inside English text */
+    .translatable-en::selection,
+    .translatable-en *::selection {
+      background-color: rgba(16, 185, 129, 0.35);
+      color: inherit;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen pb-28 selection:bg-emerald-500/30">
+
+  <!-- ==================== TOP HEADER & CONTROLS ==================== -->
+  <header class="sticky top-0 z-30 backdrop-blur-md bg-white/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+    <div class="max-w-4xl mx-auto px-3 sm:px-5 py-2.5">
+      <!-- Top Row: Title + Quick Actions -->
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-sky-600 flex items-center justify-center text-white font-mono font-bold text-base shadow-md shrink-0">
+            J1
+          </div>
+          <div class="truncate">
+            <h1 class="text-sm sm:text-base font-extrabold tracking-tight truncate">
+              مراجعة برمجة الحاسوب 1 (Java)
+            </h1>
+            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 truncate">
+              بنك الأسئلة الشامل (Q01 – Q115) • شرح مفصل لكل سؤال وترجمة فورية عند التظليل
+            </p>
+          </div>
+        </div>
+
+        <!-- Utility Controls: Font Scale, Shuffle, Theme, Reset -->
+        <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          <!-- Font Scaling Group -->
+          <div class="flex items-center bg-slate-100 dark:bg-slate-800 rounded-xl p-0.5 border border-slate-200 dark:border-slate-700" title="حجم الخط">
+            <button id="font-dec" type="button" class="px-2 py-1 text-xs font-bold rounded-lg hover:bg-white dark:hover:bg-slate-700 transition" aria-label="تصغير الخط">A-</button>
+            <button id="font-reset" type="button" class="px-2 py-1 text-xs font-bold rounded-lg hover:bg-white dark:hover:bg-slate-700 transition" aria-label="الحجم الافتراضي">A</button>
+            <button id="font-inc" type="button" class="px-2 py-1 text-xs font-bold rounded-lg hover:bg-white dark:hover:bg-slate-700 transition" aria-label="تكبير الخط">A+</button>
+          </div>
+
+          <!-- Shuffle Button -->
+          <button id="btn-shuffle" type="button" title="ترتيب عشوائي للأسئلة"
+            class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-emerald-500 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+            </svg>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button id="btn-theme" type="button" title="تبديل المظهر (ليلي / نهاري)"
+            class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-emerald-500 transition">
+            <!-- Sun Icon (shown in dark mode) -->
+            <svg id="icon-sun" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4" />
+              <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+            <!-- Moon Icon (shown in light mode) -->
+            <svg id="icon-moon" class="w-4 h-4 block dark:hidden text-slate-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+          </button>
+
+          <!-- Reset Progress Button -->
+          <button id="btn-reset-open" type="button" title="إعادة ضبط التقدم"
+            class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode Switcher Row -->
+      <div class="mt-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+        <button data-mode="quiz" class="mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5">
+          <span>🎯</span>
+          <span>وضع الاختبار التفاعلي</span>
+        </button>
+        <button data-mode="study" class="mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5">
+          <span>📖</span>
+          <span>وضع الدراسة والشرح</span>
+        </button>
+        <button data-mode="wrong" class="mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5">
+          <span>❌</span>
+          <span>مراجعة أخطائي</span>
+          <span id="badge-wrong" class="px-1.5 py-0.5 rounded-full text-[10px] bg-rose-500/20 text-rose-500 font-extrabold">0</span>
+        </button>
+        <button data-mode="bookmarked" class="mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5">
+          <span>⭐</span>
+          <span>المفضلة</span>
+          <span id="badge-bookmarked" class="px-1.5 py-0.5 rounded-full text-[10px] bg-amber-500/20 text-amber-500 font-extrabold">0</span>
+        </button>
+      </div>
+
+      <!-- Chapter Filter Tabs & Instant Search -->
+      <div class="mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5">
+          <button data-chapter="all" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            الكل (115)
+          </button>
+          <button data-chapter="1" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            Ch 1 (9)
+          </button>
+          <button data-chapter="2" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            Ch 2 (27)
+          </button>
+          <button data-chapter="3" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            Ch 3 (18)
+          </button>
+          <button data-chapter="4" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            Ch 4 (30)
+          </button>
+          <button data-chapter="5" class="chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition">
+            Ch 5 (31)
+          </button>
+        </div>
+
+        <!-- Instant Search Input -->
+        <div class="relative w-full sm:w-56 shrink-0">
+          <input id="search-input" type="text" placeholder="ابحث برقم السؤال أو كلمة..."
+            class="w-full pl-7 pr-3 py-1.5 rounded-xl text-xs bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-emerald-500 transition" />
+          <button id="btn-clear-search" type="button" title="مسح البحث"
+            class="hidden absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold">
+            ✕
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT AREA ==================== -->
+  <main class="max-w-4xl mx-auto px-3 sm:px-5 pt-4">
+
+    <!-- Live Stats & Progress Bar -->
+    <section class="mb-4 bg-white dark:bg-slate-900 rounded-2xl p-3 sm:p-4 border border-slate-200 dark:border-slate-800 shadow-sm">
+      <div class="grid grid-cols-4 gap-2 text-center mb-2.5">
+        <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl py-1.5 px-2">
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">صحيح</div>
+          <div id="stat-correct" class="text-sm sm:text-base font-extrabold text-emerald-600 dark:text-emerald-400">0</div>
+        </div>
+        <div class="bg-rose-500/10 border border-rose-500/20 rounded-xl py-1.5 px-2">
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">خطأ</div>
+          <div id="stat-wrong" class="text-sm sm:text-base font-extrabold text-rose-600 dark:text-rose-400">0</div>
+        </div>
+        <div class="bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl py-1.5 px-2">
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">متبقي</div>
+          <div id="stat-remaining" class="text-sm sm:text-base font-extrabold text-slate-700 dark:text-slate-200">115</div>
+        </div>
+        <div class="bg-sky-500/10 border border-sky-500/20 rounded-xl py-1.5 px-2">
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">نسبة الدقة</div>
+          <div id="stat-accuracy" class="text-sm sm:text-base font-extrabold text-sky-600 dark:text-sky-400">0%</div>
+        </div>
+      </div>
+
+      <!-- Segmented Progress Bar -->
+      <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden flex">
+        <div id="bar-correct" class="bg-emerald-500 h-full transition-all duration-300" style="width: 0%"></div>
+        <div id="bar-wrong" class="bg-rose-500 h-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </section>
+
+    <!-- Empty Filter State (Shown when e.g. Wrong or Bookmarked list is empty) -->
+    <section id="empty-state" class="hidden bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 text-center shadow-sm">
+      <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-2xl">
+        📭
+      </div>
+      <h2 id="empty-title" class="text-lg font-bold mb-1">لا توجد أسئلة في هذا القسم حالياً</h2>
+      <p id="empty-desc" class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+        جرّب العودة إلى وضع الاختبار أو تصفح جميع الفصول.
+      </p>
+      <button id="btn-back-all" type="button"
+        class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-md">
+        عرض جميع الأسئلة (115)
+      </button>
+    </section>
+
+    <!-- Question Card Container -->
+    <article id="question-card" class="bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-md transition-all">
+      <!-- Question Header Badges -->
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex flex-wrap items-center gap-2">
+          <span id="q-id-badge" class="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-mono font-bold text-xs sm:text-sm border border-emerald-500/30">
+            Q01
+          </span>
+          <span id="q-chapter-badge" class="px-2.5 py-1 rounded-xl bg-sky-500/10 text-sky-700 dark:text-sky-300 font-semibold text-xs border border-sky-500/20">
+            Chapter 1
+          </span>
+          <span id="q-topic-badge" dir="ltr" class="px-2.5 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-[11px] font-semibold">
+            BASIC CONCEPT
+          </span>
+        </div>
+
+        <!-- Question Action Pills: Retry -->
+        <div class="flex items-center gap-1.5">
+          <button id="btn-retry-question" type="button" title="إعادة محاولة هذا السؤال"
+            class="hidden px-2.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 dark:text-amber-300 text-xs font-bold flex items-center gap-1 transition">
+            <span>↺</span>
+            <span>إعادة المحاولة</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- English Question Prompt (LTR) -->
+      <div id="q-prompt" dir="ltr" class="translatable-en text-left font-semibold text-slate-900 dark:text-slate-50 leading-relaxed mb-4 select-text">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Java Code Snippet Block (Optional, LTR) -->
+      <div id="q-code-wrapper" class="hidden mb-5 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700/80 bg-slate-900/5 dark:bg-slate-950 shadow-inner">
+        <div dir="ltr" class="flex items-center justify-between px-3.5 py-1.5 bg-slate-200/70 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 text-[11px] font-mono text-slate-600 dark:text-slate-400">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-400/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+            <span class="ml-1.5 font-semibold">Java Snippet</span>
+          </div>
+          <button id="btn-copy-code" type="button" class="px-2 py-0.5 rounded-md hover:bg-slate-300/60 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition flex items-center gap-1">
+            <span id="copy-code-label">Copy</span>
+          </button>
+        </div>
+        <pre id="q-code" dir="ltr" class="translatable-en code-block p-3.5 sm:p-4 overflow-x-auto text-slate-800 dark:text-slate-100 select-text"></pre>
+      </div>
+
+      <!-- Answer Options List (LTR) -->
+      <div id="q-options" class="space-y-2.5">
+        <!-- Options injected dynamically -->
+      </div>
+
+      <!-- Arabic Explanation Card -->
+      <div id="q-explanation-box" class="hidden mt-5 rounded-2xl p-4 sm:p-5 bg-gradient-to-l from-emerald-500/10 via-sky-500/5 to-transparent border border-emerald-500/30 shadow-sm">
+        <div class="flex items-center gap-2 mb-2 pb-2 border-b border-emerald-500/20">
+          <span class="w-7 h-7 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-sm font-bold shadow-sm shrink-0">
+            💡
+          </span>
+          <h3 class="font-extrabold text-sm sm:text-base text-emerald-700 dark:text-emerald-300">
+            لماذا هذه الإجابة صحيحة؟ (الشرح المفصل)
+          </h3>
+        </div>
+        <div id="q-explanation-text" class="text-slate-700 dark:text-slate-200 leading-relaxed space-y-1.5 whitespace-pre-line">
+          <!-- Detailed Arabic explanation injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Subtle Tip for Text Selection Translation -->
+      <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
+        <span>💡 ظلّل أي كلمة أو عبارة إنجليزية لظهور الترجمة العربية الفورية</span>
+        <span class="hidden sm:inline font-mono">← التالي | السابق → | 1-4 للاختيار</span>
+      </div>
+    </article>
+  </main>
+
+  <!-- ==================== FIXED BOTTOM NAVIGATION BAR ==================== -->
+  <nav aria-label="التنقل بين الأسئلة"
+    class="fixed bottom-0 inset-x-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div class="max-w-4xl mx-auto px-2.5 sm:px-5 py-2.5 flex items-center justify-between gap-1.5 sm:gap-3">
+      <!-- Previous Button -->
+      <button id="btn-prev" type="button"
+        class="flex-1 sm:flex-initial sm:min-w-[115px] py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-40 disabled:pointer-events-none font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+        <span>السابق</span>
+      </button>
+
+      <!-- Clickable Question Counter / Quick-Jump Grid Trigger -->
+      <button id="btn-jump-open" type="button" title="الانتقال السريع بين الأسئلة"
+        class="py-2.5 px-3.5 sm:px-5 rounded-xl bg-slate-900 dark:bg-slate-800 text-white border border-slate-700 hover:border-emerald-500 font-mono font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <span id="nav-counter">1 / 115</span>
+      </button>
+
+      <!-- Bookmark / Star Button -->
+      <button id="btn-bookmark" type="button" title="تحديد للمراجعة"
+        class="py-2.5 px-3 sm:px-4 rounded-xl border font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition">
+        <span id="bookmark-star" class="text-base leading-none">☆</span>
+        <span class="hidden md:inline">تحديد للمراجعة</span>
+      </button>
+
+      <!-- Next Button -->
+      <button id="btn-next" type="button"
+        class="flex-1 sm:flex-initial sm:min-w-[115px] py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:pointer-events-none text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/20 transition">
+        <span>التالي</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== SELECTION TRANSLATION POPOVER (TEXT-ONLY) ==================== -->
+  <div id="translation-popover"
+    class="hidden fixed z-50 w-72 sm:w-80 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xl p-3.5 popover-animate">
+    <div class="flex items-start justify-between gap-2 pb-2 mb-2 border-b border-slate-100 dark:border-slate-700">
+      <div dir="ltr" class="text-left min-w-0 flex-1">
+        <span class="text-[10px] uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-bold block">Selected English</span>
+        <p id="popover-en-text" class="font-mono font-bold text-sm text-slate-900 dark:text-white break-words"></p>
+      </div>
+      <div class="flex items-center gap-1 shrink-0">
+        <button id="popover-close-btn" type="button" title="إغلاق"
+          class="p-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs font-bold transition">
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <div class="mb-2.5">
+      <span class="text-[11px] text-slate-400 block mb-0.5">الترجمة العربية الفورية:</span>
+      <p id="popover-ar-text" class="text-sm font-bold text-slate-800 dark:text-slate-100 leading-snug"></p>
+    </div>
+
+    <a id="popover-google-link" href="#" target="_blank" rel="noopener noreferrer"
+      class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-500/15 text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-300 text-xs font-bold flex items-center justify-center gap-1.5 transition">
+      <span>🌐</span>
+      <span>ترجمة في Google</span>
+    </a>
+  </div>
+
+  <!-- ==================== QUICK-JUMP GRID MODAL ==================== -->
+  <div id="jump-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white dark:bg-slate-900 w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl max-h-[85vh] flex flex-col overflow-hidden">
+      <div class="px-5 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div>
+          <h2 class="font-extrabold text-base sm:text-lg">خريطة الأسئلة السريعة</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">اضغط على رقم أي سؤال للانتقال إليه مباشرة</p>
+        </div>
+        <button id="btn-jump-close" type="button"
+          class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center font-bold text-slate-600 dark:text-slate-300">
+          ✕
+        </button>
+      </div>
+
+      <!-- Legend -->
+      <div class="px-5 py-2.5 bg-slate-50 dark:bg-slate-950/50 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center gap-3 text-[11px] font-semibold">
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> إجابة صحيحة</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> إجابة خاطئة</span>
+        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-200 dark:bg-slate-800 border border-slate-400/40 inline-block"></span> لم يُجب</span>
+        <span class="flex items-center gap-1.5"><span class="text-amber-500">★</span> محدد للمراجعة</span>
+      </div>
+
+      <!-- Per-Chapter Accuracy Breakdown -->
+      <div id="chapter-breakdown" class="px-5 py-2.5 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 grid grid-cols-5 gap-1.5 text-center">
+        <!-- Populated dynamically when Jump Modal opens -->
+      </div>
+
+      <!-- Grid Container -->
+      <div id="jump-grid" class="p-4 sm:p-5 overflow-y-auto grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-2">
+        <!-- Buttons populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== RESET CONFIRMATION MODAL (No confirm()) ==================== -->
+  <div id="reset-modal" class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 w-full max-w-sm rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-5 text-center">
+      <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-2xl">
+        ⚠️
+      </div>
+      <h3 class="font-extrabold text-lg mb-1">إعادة ضبط التقدم؟</h3>
+      <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-5">
+        سيتم مسح جميع إجاباتك المحفوظة والأسئلة المحددة للمراجعة والبدء من السؤال الأول.
+      </p>
+      <div class="flex items-center gap-2.5">
+        <button id="btn-reset-cancel" type="button"
+          class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-sm transition">
+          إلغاء
+        </button>
+        <button id="btn-reset-confirm" type="button"
+          class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm transition shadow-md">
+          نعم، امسح الكل
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== APPLICATION DATA & LOGIC ==================== -->
+  <script>
+    /**
+     * Complete Question Bank: All 115 Multiple-Choice & True/False Questions (Q01 - Q115)
+     * Chapters 1 to 5 from "Computer Programming 1 - Java (Review Sheet)"
+     * Each question includes a detailed, step-by-step pedagogical Arabic explanation.
+     */
+    const QUESTIONS_DB = [
+      // ==================== CHAPTER 1: Basic Concepts and Translation (Q01 - Q09) ====================
+      {
+        id: "Q01", num: 1, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "BASIC CONCEPT",
+        prompt: "Which pair describes the two basic components of a computer?",
+        options: { A: "Programs and variables", B: "Hardware and software", C: "Compiler and source code", D: "Input and String" },
+        correct: "B",
+        explanation: "✓ القاعدة الأساسية: يتكون أي نظام حاسوبي من ركيزتين أساسيتين لا يعمل أحدهما دون الآخر: المكونات المادية الملموسة (Hardware) مثل المعالج والذاكرة والشاشة، والبرمجيات (Software) وهي التعليمات والبرامج التي تشغل العتاد.\n✕ لماذا باقي الخيارات خاطئة؟ المتغيرات (Variables) والكود المصدري والمترجم هي مفاهيم برمجية تندرج جميعها تحت البرمجيات فقط، وليست المكونين الأساسيين للحاسوب."
+      },
+      {
+        id: "Q02", num: 2, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "BASIC CONCEPT",
+        prompt: "Which of the following is a high-level programming language?",
+        options: { A: "Java", B: "Machine code", C: "Binary instructions", D: "CPU registers" },
+        correct: "A",
+        explanation: "✓ السبب: لغات البرمجة عالية المستوى (High-level languages) مثل Java صُممت لتكون قريبة من لغة البشر والرياضيات وسهلة القراءة والكتابة للمبرمج.\n✕ لماذا باقي الخيارات خاطئة؟ Machine code و Binary instructions تمثل لغة الآلة منخفضة المستوى (أصفار وآحاد)، أما CPU registers فهي وحدات تخزين مادية داخل المعالج."
+      },
+      {
+        id: "Q03", num: 3, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "BASIC CONCEPT",
+        prompt: "Which language level uses binary instructions made of 0s and 1s?",
+        options: { A: "High-level language", B: "Assembly language", C: "Machine language", D: "Java source code" },
+        correct: "C",
+        explanation: "✓ السبب: لغة الآلة (Machine language) هي اللغة الوحيدة التي يفهمها المعالج (CPU) مباشرة دون ترجمة، وتُكتب على شكل سلاسل ثنائية من الأصفار والآحاد (0s and 1s).\n✕ لماذا باقي الخيارات خاطئة؟ لغة التجميع (Assembly) تستخدم اختصارات نصية مثل ADD و MOV، بينما Java ولغات المستوى العالي تُكتب بكلمات إنجليزية مفهومة."
+      },
+      {
+        id: "Q04", num: 4, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "TRANSLATION DIAGRAM",
+        prompt: "In the diagram, where are the programmer's instructions written?",
+        options: { A: "Program Execution", B: "Source Code", C: "CPU output only", D: "Hardware" },
+        correct: "B",
+        explanation: "✓ السبب: يقوم المبرمج بكتابة التعليمات والأوامر البرمجية بلغة مثل Java داخل ملف يُسمى الكود المصدري (Source Code)، وهي نقطة البداية في مخطط الترجمة.\n✕ لماذا باقي الخيارات خاطئة؟ Program Execution هي مرحلة تشغيل البرنامج النهائي بعد الترجمة، أما Hardware فهو العتاد المادي."
+      },
+      {
+        id: "Q05", num: 5, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "TRANSLATION DIAGRAM",
+        prompt: "Which tool translates source code into another form?",
+        options: { A: "Scanner", B: "Compiler", C: "Printer", D: "Monitor" },
+        correct: "B",
+        explanation: "✓ السبب: المترجم (Compiler) هو الأداة البرمجية التي تأخذ الكود المصدري (Source Code) وتترجمه إلى صيغة وسيطة أو لغة آلة (في جافا يحول ملف .java إلى ملف Bytecode بامتداد .class).\n✕ لماذا باقي الخيارات خاطئة؟ Scanner أداة لقراءة المدخلات في جافا، بينما Printer و Monitor أجهزة إخراج مادية."
+      },
+      {
+        id: "Q06", num: 6, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "BASIC CONCEPT",
+        prompt: "What are the four basic computer operations?",
+        options: { A: "Writing, compiling, linking, deleting", B: "Input, processing, storage, output", C: "Classes, methods, variables, objects", D: "Java, Python, C, C++" },
+        correct: "B",
+        explanation: "✓ القاعدة: يؤدي الحاسوب أربع عمليات أساسية لمعالجة البيانات: الإدخال (Input) لاستقبال البيانات، المعالجة (Processing) لإجراء العمليات عليها، التخزين (Storage) لحفظها، والإخراج (Output) لعرض النتائج.\n✕ لماذا باقي الخيارات خاطئة؟ الخيار A يصف خطوات بناء البرنامج، و C يصف مكونات البرمجة كائنية التوجه، و D أسماء لغات برمجة."
+      },
+      {
+        id: "Q07", num: 7, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "TRANSLATION DIAGRAM",
+        prompt: "Which statement about an interpreter matches Chapter 1?",
+        options: { A: "It is physical hardware.", B: "It executes a program through a software runtime.", C: "It is a Java variable.", D: "It only displays printed text." },
+        correct: "B",
+        explanation: "✓ السبب: المفسر (Interpreter) هو برنامج (وليس قطعة مادية) يقوم بقراءة الكود وتنفيذه مباشرة عبر بيئة تشغيل برمجية (Software runtime).\n✕ لماذا باقي الخيارات خاطئة؟ المفسر ليس عتاداً مادياً (A) ولا متغيراً في جافا (C) ولا يقتصر عمله على طباعة النصوص فقط (D)."
+      },
+      {
+        id: "Q08", num: 8, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "BASIC CONCEPT",
+        prompt: "Which environment executes Java bytecode?",
+        options: { A: "JVM", B: "A Java identifier", C: "A source-code comment", D: "The Scanner method" },
+        correct: "A",
+        explanation: "✓ السبب: عند ترجمة كود جافا ينتج كود وسيط يُسمى Bytecode، وتتولى آلة جافا الافتراضية (JVM - Java Virtual Machine) تشغيل هذا الكود على أي نظام تشغيل (Windows, Mac, Linux).\n✕ لماذا باقي الخيارات خاطئة؟ identifier هو اسم المتغير، و comment هو التعليق التوضيحي، و Scanner للقراءة."
+      },
+      {
+        id: "Q09", num: 9, chapter: 1, chapterTitle: "Ch 1: Basic Concepts",
+        topic: "TRANSLATION DIAGRAM",
+        prompt: "According to the translation diagram, which order is correct?",
+        code: "SOURCE CODE\n   ↓\nCOMPILER OR INTERPRETER\n   ↓\nPROGRAM EXECUTION",
+        options: {
+          A: "Program Execution → Source Code → Compiler",
+          B: "Source Code → Compiler or Interpreter → Program Execution",
+          C: "Compiler → Program Execution → Source Code",
+          D: "Program Execution → Interpreter → Source Code"
+        },
+        correct: "B",
+        explanation: "✓ التتبع المنطقي للخطوات:\n1. يبدأ المبرمج بكتابة الكود المصدري (Source Code).\n2. يمر الكود على المترجم أو المفسر (Compiler or Interpreter) لتحويله.\n3. أخيراً يتم تشغيل البرنامج وظهور النتائج (Program Execution).\nلذلك الترتيب الوحيد الصحيح هو B."
+      },
+
+      // ==================== CHAPTER 2: Java Structure and Data Types (Q10 - Q36) ====================
+      {
+        id: "Q10", num: 10, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "TRUE / FALSE",
+        prompt: "Java single-line comments begin with //.",
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: "✓ الإجابة True: في لغة جافا نستخدم // لكتابة تعليق من سطر واحد يتجاهله المترجم تماماً عند التشغيل، بينما نستخدم /* ... */ للتعليقات متعددة الأسطر."
+      },
+      {
+        id: "Q11", num: 11, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "TRUE / FALSE",
+        prompt: "The uppercase and lowercase letters in a Java identifier are treated as different.",
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: "✓ الإجابة True: لغة جافا لغة حساسة لحالة الأحرف (Case-Sensitive)، مما يعني أن المتغير age يختلف تماماً عن Age وعن AGE في الذاكرة."
+      },
+      {
+        id: "Q12", num: 12, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which is the correct declaration for age = 21?",
+        options: { A: "String age = 21;", B: "int age = 21;", C: "boolean age = 21;", D: "char age = 21;" },
+        correct: "B",
+        explanation: "✓ السبب: القيمة 21 هي عدد صحيح (بدون فاصلة عشرية)، والنوع المخصص للأعداد الصحيحة في جافا هو int.\n✕ لماذا باقي الخيارات خاطئة؟ String يتطلب علامتي تنصيص \"21\"، و boolean يقبل true أو false فقط، و char يقبل حرفاً واحداً بين ' '."
+      },
+      {
+        id: "Q13", num: 13, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named studentAge must hold the whole number 19. Which declaration is correct?",
+        options: { A: "int studentAge = 19;", B: "String studentAge = 19;", C: "char studentAge = 19;", D: "boolean studentAge = 19;" },
+        correct: "A",
+        explanation: "✓ السبب: المطلوب تخزين عدد صحيح (whole number) قيمته 19 في متغير اسمه studentAge، وصيغة التعريف الصحيحة هي: النوع + اسم المتغير + = + القيمة + ؛ أي int studentAge = 19;."
+      },
+      {
+        id: "Q14", num: 14, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which declaration correctly stores true?",
+        options: { A: "boolean passed = true;", B: "String passed = true;", C: "int passed = true;", D: "char passed = true;" },
+        correct: "A",
+        explanation: "✓ السبب: القيمة المنطقية true (صواب) تُخزن حصراً في متغير من نوع boolean وتُكتب بأحرف صغيرة دون علامات تنصيص."
+      },
+      {
+        id: "Q15", num: 15, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named passed must store true. Which line is correct?",
+        options: { A: "String passed = true;", B: "boolean passed = true;", C: "int passed = true;", D: "char passed = 'true';" },
+        correct: "B",
+        explanation: "✓ السبب: لتخزين القيمة المنطقية true في المتغير passed نستخدم النوع boolean.\n✕ لماذا باقي الخيارات خاطئة؟ في A و C لا يمكن إسناد قيمة منطقية إلى String أو int، وفي D لا يجوز وضع أكثر من حرف واحد داخل علامتي التنصيص المفردة للنوع char."
+      },
+      {
+        id: "Q16", num: 16, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named isReady must store false. Choose the correct line.",
+        options: { A: "boolean isReady = false;", B: "String isReady = false;", C: "int isReady = false;", D: 'boolean isReady = "false";' },
+        correct: "A",
+        explanation: "✓ السبب: المتغير المنطقي boolean يأخذ القيمة false مباشرة دون علامتي تنصيص.\n✕ انتبه للفخ في الخيار D: وضع علامتي تنصيص \"false\" يحولها إلى نص (String) فيرفضها المترجم مع النوع boolean!"
+      },
+      {
+        id: "Q17", num: 17, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which declaration correctly stores the word Java?",
+        options: { A: "char language = 'Java';", B: 'String language = "Java";', C: 'int language = "Java";', D: "double language = Java;" },
+        correct: "B",
+        explanation: '✓ السبب: الكلمات والجمل النصية (Strings) تُخزن في النوع String (بحرف S كبير) وتُحصر بين علامتي تنصيص مزدوجة "Java".\n✕ لماذا A خاطئ؟ النوع char يخزن حرفاً واحداً فقط وليس كلمة من 4 أحرف.'
+      },
+      {
+        id: "Q18", num: 18, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named studentName must hold the word Sara. Choose the correct declaration.",
+        options: { A: "String studentName = Sara;", B: 'String studentName = "Sara";', C: 'char studentName = "Sara";', D: "int studentName = Sara;" },
+        correct: "B",
+        explanation: '✓ السبب: الاسم Sara هو سلسلة نصية (String) ويجب وضعه بين علامتي تنصيص مزدوجة "Sara".\n✕ لماذا A خاطئ؟ كتابة Sara بدون علامتي تنصيص تجعل جافا تبحث عن متغير آخر اسمه Sara وتعطي خطأ برمجياً.'
+      },
+      {
+        id: "Q19", num: 19, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which declaration stores one character?",
+        options: { A: "String letter = A;", B: "char letter = 'A';", C: 'int letter = "A";', D: "boolean letter = A;" },
+        correct: "B",
+        explanation: "✓ السبب: لتخزين حرف واحد فقط (One character) نستخدم النوع char ونضع الحرف بين علامتي تنصيص مفردة (Single quotes) هكذا: 'A'."
+      },
+      {
+        id: "Q20", num: 20, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named initial must hold the single letter B. Which is valid?",
+        options: { A: "String initial = B;", B: 'char initial = "B";', C: "boolean initial = true;", D: "char initial = 'B';" },
+        correct: "D",
+        explanation: "✓ السبب: النوع char يشترط استخدام علامتي التنصيص المفردة 'B'.\n✕ انتبه للفخ في B: علامتا التنصيص المزدوجة \"B\" تعني نصاً (String) حتى لو كان بداخله حرف واحد، لذا لا يقبلها النوع char."
+      },
+      {
+        id: "Q21", num: 21, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named grade must hold the character A. Which declaration is correct?",
+        options: { A: "String grade = A;", B: "int grade = A;", C: "char grade = 'A';", D: "boolean grade = A;" },
+        correct: "C",
+        explanation: "✓ السبب: المتغير grade يخزن رمزاً واحداً هو الحرف A، لذا نستخدم النوع char مع علامتي تنصيص مفردة 'A'."
+      },
+      {
+        id: "Q22", num: 22, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which declaration correctly stores a decimal number?",
+        options: { A: "int price = 12.5;", B: "char price = 12.5;", C: "double price = 12.5;", D: "boolean price = 12.5;" },
+        correct: "C",
+        explanation: "✓ السبب: الرقم 12.5 يحتوي على فاصلة عشرية، والنوع الافتراضي في جافا لتخزين الأعداد العشرية هو double.\n✕ لماذا A خاطئ؟ النوع int يخزن الأعداد الصحيحة فقط ويعطي خطأ إذا أسندت له رقماً عشرياً."
+      },
+      {
+        id: "Q23", num: 23, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A variable named price must hold the decimal 15.75. Choose the correct declaration.",
+        options: { A: "int price = 15.75;", B: "char price = 15.75;", C: "double price = 15.75;", D: "boolean price = 15.75;" },
+        correct: "C",
+        explanation: "✓ السبب: بما أن السعر 15.75 قيمة عشرية، نستخدم النوع double لتعريف المتغير price دون فقدان الكسور العشرية."
+      },
+      {
+        id: "Q24", num: 24, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "OUTPUT SYNTAX",
+        prompt: "Which statement prints Hello and then starts a new line?",
+        options: { A: 'System.out.print("Hello");', B: 'System.out.println("Hello");', C: 'System.in.println("Hello");', D: "System.out.println(Hello);" },
+        correct: "B",
+        explanation: '✓ السبب: الدالة System.out.println("Hello"); تطبع النص ثم تنزل سطراً جديداً (ln اختصار line).\n✕ لماذا باقي الخيارات خاطئة؟ الخيار A يطبع دون سطر جديد، و C يستخدم System.in المخصص للإدخال، و D يفتقد علامتي التنصيص حول Hello.'
+      },
+      {
+        id: "Q25", num: 25, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "ESCAPE SEQUENCES",
+        prompt: "Which escape sequence starts a new line inside a string?",
+        options: { A: "\\t", B: "\\n", C: "\\\\", D: '\\"' },
+        correct: "B",
+        explanation: '✓ القاعدة: رموز الهروب (Escape Sequences) تبدأ بشرطة مائلة للخلف \\:\n• \\n (New line): تنزل سطراً جديداً.\n• \\t (Tab): تترك مسافة جدولة أفقية.\n• \\\\: تطبع شرطة مائلة واحدة.\n• \\": تطبع علامة تنصيص مزدوجة.'
+      },
+      {
+        id: "Q26", num: 26, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "FILE / CLASS NAME",
+        prompt: "The file is saved as StudentRecord.java. Which public class declaration matches?",
+        options: { A: "public class studentRecord {", B: "public class StudentRecord {", C: "public class StudentRecords {", D: "public class Record {" },
+        correct: "B",
+        explanation: "✓ قاعدة جافا الصارمة: إذا كان الكلاس معرفاً بـ public، يجب أن يطابق اسمه اسم الملف حرفاً بحرف وبنفس حالة الأحرف الكبيرة والصغيرة (StudentRecord يطابق StudentRecord.java).\n✕ في A الحرف الأول صغير (s)، وفي C يوجد حرف s زائد في النهاية."
+      },
+      {
+        id: "Q27", num: 27, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "FILE / CLASS NAME",
+        prompt: "The public class is named ExamResult. What must the file name be?",
+        options: { A: "examresult.java", B: "ExamResult.class", C: "ExamResult.java", D: "Main.java" },
+        correct: "C",
+        explanation: "✓ السبب: ملف الكود المصدري يجب أن يحمل نفس اسم الـ public class تماماً متبوعاً بالامتداد .java ليصبح ExamResult.java.\n✕ ملاحظة: الامتداد .class في الخيار B هو للملف المترجم (Bytecode) وليس ملف الكود المصدري."
+      },
+      {
+        id: "Q28", num: 28, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "IDENTIFIERS",
+        prompt: "Which name is a valid Java variable identifier?",
+        options: { A: "2score", B: "studentScore", C: "class", D: "total-mark" },
+        correct: "B",
+        explanation: "✓ قواعد تسمية المتغيرات (Identifiers) في جافا:\n• studentScore (B) صحيح 100%.\n✕ لماذا البقية مرفوضة؟\n• 2score (A): ممنوع أن يبدأ الاسم برقم.\n• class (C): كلمة محجوزة في لغة جافا.\n• total-mark (D): علامة الطرح (-) غير مسموحة في أسماء المتغيرات (يُسمح فقط بـ _ و $)."
+      },
+      {
+        id: "Q29", num: 29, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE CATEGORY",
+        prompt: "Which one is a non-primitive/reference type?",
+        options: { A: "int", B: "boolean", C: "String", D: "double" },
+        correct: "C",
+        explanation: "✓ السبب: أنواع البيانات في جافا قسمان: أساسية (Primitive) وعددها 8 وتبدأ بحرف صغير (مثل int, boolean, double)، ومرجعية (Non-primitive / Reference) مثل String والمصفوفات والكلاسات وتبدأ بحرف كبير."
+      },
+      {
+        id: "Q30", num: 30, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE CATEGORY",
+        prompt: "Which one is a primitive data type?",
+        options: { A: "String", B: "Class", C: "Array", D: "long" },
+        correct: "D",
+        explanation: "✓ السبب: الأنواع الأساسية الثمانية (Primitive types) هي: byte, short, int, long, float, double, char, boolean. إذن long هو النوع الأساسي الوحيد هنا، بينما String و Class و Array أنواع مرجعية."
+      },
+      {
+        id: "Q31", num: 31, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE CATEGORY",
+        prompt: 'The declaration String city = "Amman"; uses which category?',
+        options: { A: "Primitive", B: "Non-primitive (reference)", C: "Arithmetic operator", D: "Boolean literal" },
+        correct: "B",
+        explanation: "✓ السبب: المتغير city مُعرّف من النوع String، و String في جافا هو كلاس جاهز يُصنف ضمن الأنواع غير الأساسية / المرجعية (Non-primitive / Reference)."
+      },
+      {
+        id: "Q32", num: 32, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE CATEGORY",
+        prompt: "Which list contains only primitive data types?",
+        options: { A: "int, double, char", B: "String, int, boolean", C: "Array, char, float", D: "Object, long, byte" },
+        correct: "A",
+        explanation: "✓ السبب: في القائمة A جميع العناصر الثلاثة (int, double, char) من الأنواع الأساسية الثمانية.\n✕ في B يوجد String (مرجعي)، وفي C يوجد Array (مرجعي)، وفي D يوجد Object (مرجعي)."
+      },
+      {
+        id: "Q33", num: 33, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DATA TYPE SELECTION",
+        prompt: "Which declaration correctly stores a float value?",
+        options: { A: "float rate = 3.5;", B: "float rate = 3.5f;", C: "char rate = 3.5f;", D: "boolean rate = 3.5f;" },
+        correct: "B",
+        explanation: "✓ السبب: أي رقم عشري يُكتب في جافا مثل 3.5 يعتبره المترجم تلقائياً من نوع double (64 بت). ولتخزينه داخل متغير float (32 بت) يجب وضع الحرف f أو F في نهايته: 3.5f."
+      },
+      {
+        id: "Q34", num: 34, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A float variable named rate must store 4.5. Which declaration compiles?",
+        options: { A: "float rate = 4.5;", B: 'float rate = "4.5";', C: "float rate = 4.5f;", D: "boolean rate = 4.5;" },
+        correct: "C",
+        explanation: "✓ السبب: السطر float rate = 4.5f; هو الوحيد الذي يترجم (Compiles) دون أخطاء بفضل اللاحقة f.\n✕ الخيار A يعطي خطأ عدم توافق الأنواع (double إلى float)، و B يضع القيمة كنص بين علامتي تنصيص."
+      },
+      {
+        id: "Q35", num: 35, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "DECLARE THE VARIABLE",
+        prompt: "A long variable named population must store 3000000000. Choose the valid declaration.",
+        options: { A: "int population = 3000000000;", B: "long population = 3000000000L;", C: "boolean population = 3000000000;", D: "char population = 3000000000;" },
+        correct: "B",
+        explanation: "✓ السبب: أقصى قيمة يستوعبها النوع int هي حوالي 2.14 مليار، لذا الرقم 3000000000 (3 مليار) يتجاوز سعة int. نستخدم النوع long ونضيف الحرف L في نهاية الرقم ليقبل المترجم القيمة الكبيرة."
+      },
+      {
+        id: "Q36", num: 36, chapter: 2, chapterTitle: "Ch 2: Structure & Data Types",
+        topic: "COMPLETE THE CODE",
+        prompt: "Which is the conventional main method declaration shown in the slides?",
+        code: 'public class WelcomeApp {\n    ______\n    {\n        System.out.println("Hello!");\n    }\n}',
+        options: {
+          A: "public void main(String[] args)",
+          B: "static public int main()",
+          C: "public static void main(String[] args)",
+          D: "public class main(String[] args)"
+        },
+        correct: "C",
+        explanation: "✓ القاعدة: نقطة البداية التي تبحث عنها آلة جافا (JVM) لتشغيل أي برنامج هي الدالة الرئيسية بصيغتها القياسية: public static void main(String[] args).\n✕ لا يجوز حذف static (كما في A) ولا تغيير void إلى int (كما في B)."
+      },
+
+      // ==================== CHAPTER 3: Arithmetic, Relational, and Logical Operators (Q37 - Q54) ====================
+      {
+        id: "Q37", num: 37, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "OPERATOR MEANING",
+        prompt: "Which operator returns the remainder after division?",
+        options: { A: "/", B: "%", C: "*", D: "-" },
+        correct: "B",
+        explanation: "✓ السبب: معامل باقي القسمة (Modulus / Remainder) هو %، فمثلاً 10 % 3 تعطي 1 (لأن 10 ÷ 3 = 3 والباقي 1). أما / فتعطي ناتج القسمة نفسه."
+      },
+      {
+        id: "Q38", num: 38, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "OPERATOR MEANING",
+        prompt: "What does x-- do?",
+        options: { A: "Adds one to x", B: "Subtracts one from x", C: "Multiplies x by two", D: "Sets x to zero" },
+        correct: "B",
+        explanation: "✓ السبب: المعامل -- يُسمى معامل الإنقاص (Decrement operator)، وهو يكافئ x = x - 1، أي ينقص قيمة المتغير x بمقدار 1."
+      },
+      {
+        id: "Q39", num: 39, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "OPERATOR MEANING",
+        prompt: "What does >= test?",
+        options: { A: "Greater than only", B: "Less than or equal", C: "Greater than or equal", D: "Not equal" },
+        correct: "C",
+        explanation: "✓ السبب: الرمز >= يجمع بين علامتي > (أكبر من) و = (يساوي)، لذا يختبر ما إذا كان الطرف الأيسر أكبر من أو يساوي الطرف الأيمن."
+      },
+      {
+        id: "Q40", num: 40, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "OPERATOR MEANING",
+        prompt: "What does == do?",
+        options: { A: "Assigns a value", B: "Compares values for equality", C: "Adds values", D: "Compares for inequality" },
+        correct: "B",
+        explanation: "✓ انتبه للفرق المهم جداً:\n• علامة = واحدة (Assignment) تُسند قيمة لمتغير.\n• علامتا == (Equality comparison) تقارنان بين قيمتين لمعرفة هل هما متساويتان وتعيدان true أو false."
+      },
+      {
+        id: "Q41", num: 41, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "OPERATOR MEANING",
+        prompt: "Which operator means both logical conditions must be true?",
+        options: { A: "||", B: "&&", C: "!", D: "==" },
+        correct: "B",
+        explanation: "✓ السبب: المعامل المنطقي && (AND) يشترط تحقق الشرطين معاً (الأول AND الثاني) ليعطي true.\n• أما || (OR) فيكفيه تحقق شرط واحد على الأقل.\n• أما ! (NOT) فيعكس النتيجة المنطقية."
+      },
+      {
+        id: "Q42", num: 42, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "QUICK PRACTICE: OUTPUT",
+        prompt: "What is printed?",
+        code: "System.out.println(19 % 4);",
+        options: { A: "3", B: "4", C: "5", D: "20" },
+        correct: "A",
+        explanation: "🔍 طريقة الحساب:\nنريد باقي قسمة 19 على 4:\n• أقرب مضاعف للعدد 4 أقل من 19 هو 16 (حيث 4 × 4 = 16).\n• الباقي = 19 - 16 = 3.\nإذن يطبع البرنامج 3."
+      },
+      {
+        id: "Q43", num: 43, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "COMPLETE THE OPERATOR",
+        prompt: "Which operator completes the calculation so result becomes 21?",
+        code: "int a = 7, b = 3;\nint result = a ___ b;\nSystem.out.println(result);",
+        options: { A: "+", B: "-", C: "*", D: "%" },
+        correct: "C",
+        explanation: "✓ السبب: لدينا a = 7 و b = 3، ولكي تصبح قيمة result تساوي 21 نحتاج إلى عملية الضرب: 7 * 3 = 21."
+      },
+      {
+        id: "Q44", num: 44, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: "boolean member = true;\nSystem.out.println(!member);",
+        options: { A: "true", B: "false", C: "1", D: "Compilation error" },
+        correct: "B",
+        explanation: "🔍 تتبع الكود:\n1. المتغير member قيمته true.\n2. علامة ! (Logical NOT) تعكس القيمة المنطقية.\n3. عكس true هو false، لذا يطبع false."
+      },
+      {
+        id: "Q45", num: 45, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRUE / FALSE",
+        prompt: "The following code prints 3.",
+        code: "System.out.println(17 / 5);",
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: "✓ الإجابة True: في جافا، عندما يكون البسط والمقام عددين صحيحين (17 و 5 كلاهما int)، تُجرى قسمة صحيحة (Integer Division) تُهمل الجزء العشري تماماً دون تقريب، فالناتج 3.4 يصبح 3."
+      },
+      {
+        id: "Q46", num: 46, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What does the code display?",
+        code: "int a = 18;\nint b = 4;\nSystem.out.println(a / b);",
+        options: { A: "4", B: "4.5", C: "5", D: "Compilation error" },
+        correct: "A",
+        explanation: "🔍 تتبع الكود:\nبما أن a و b من نوع int، فإن عملية القسمة 18 / 4 هي قسمة أعداد صحيحة؛ الناتج الرياضي هو 4.5 ولكن جافا تحذف الكسر العشري (.5) فيُطبع 4 فقط (وليس 4.5)."
+      },
+      {
+        id: "Q47", num: 47, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "QUICK PRACTICE: OUTPUT",
+        prompt: "What is printed?",
+        code: "System.out.println((8 > 3) && (2 > 4));",
+        options: { A: "true", B: "false", C: "2", D: "Compilation error" },
+        correct: "B",
+        explanation: "🔍 تتبع التعبير المنطقي:\n• الشرط الأول (8 > 3): صحيح (true).\n• الشرط الثاني (2 > 4): خاطئ (false).\n• الرابط بينهما && (AND) يتطلب أن يكون الطرفان true؛ وبما أن أحدهما false فالنتيجة النهائية false."
+      },
+      {
+        id: "Q48", num: 48, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: "boolean hasID = true;\nint age = 16;\nSystem.out.println(age >= 18 || hasID);",
+        options: { A: "true", B: "false", C: "0", D: "Compilation error" },
+        correct: "A",
+        explanation: "🔍 تتبع التعبير المنطقي:\n• الشرط الأول age >= 18 (أي 16 >= 18): خطأ (false).\n• الشرط الثاني hasID: قيمته true.\n• الرابط بينهما || (OR) يكفيه تحقق شرط واحد ليعطي true. بما أن الطرف الثاني true فالناتج true."
+      },
+      {
+        id: "Q49", num: 49, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "QUICK PRACTICE: OUTPUT",
+        prompt: "What is printed?",
+        code: "System.out.println(6 + 4 * 4);",
+        options: { A: "15", B: "22", C: "25", D: "30" },
+        correct: "B",
+        explanation: "🔍 قاعدة أولوية العمليات (Operator Precedence):\nالضرب (*) له أولوية أعلى من الجمع (+)، لذا ننفذ الضرب أولاً:\n1. 4 * 4 = 16\n2. 6 + 16 = 22."
+      },
+      {
+        id: "Q50", num: 50, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "QUICK PRACTICE: OUTPUT",
+        prompt: "What is printed?",
+        code: "int x = 7;\nx += 1;\nx *= 4;\nSystem.out.println(x);",
+        options: { A: "24", B: "32", C: "16", D: "14" },
+        correct: "B",
+        explanation: "🔍 تتبع قيمة x خطوة بخطوة:\n1. البداية: x = 7\n2. السطر الثاني (x += 1 تعني x = x + 1): تصبح x = 8\n3. السطر الثالث (x *= 4 تعني x = x * 4): تصبح x = 8 * 4 = 32\n4. يُطبع 32."
+      },
+      {
+        id: "Q51", num: 51, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed after these assignment operations?",
+        code: "int c = 10;\nc += 5;\nc -= 3;\nc *= 3;\nc /= 4;\nSystem.out.println(c);",
+        options: { A: "6", B: "9", C: "12", D: "18" },
+        correct: "B",
+        explanation: "🔍 تتبع قيمة المتغير c سطراً بسطر:\n1. البداية: c = 10\n2. c += 5  →  10 + 5 = 15\n3. c -= 3  →  15 - 3 = 12\n4. c *= 3  →  12 * 3 = 36\n5. c /= 4  →  36 / 4 = 9\nإذن القيمة النهائية المطبوعة هي 9."
+      },
+      {
+        id: "Q52", num: 52, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed by the two expressions?",
+        code: "int a = 5;\nSystem.out.println(a++);\nSystem.out.println(++a);",
+        options: { A: "5 then 7", B: "6 then 7", C: "6 then 6", D: "5 then 6" },
+        correct: "A",
+        explanation: "🔍 الفرق بين Postfix (a++) و Prefix (++a):\n1. البداية: a = 5.\n2. جملة System.out.println(a++): تطبع قيمة a الحالية أولاً (5) ثم تزيد a بمقدار 1 لتصبح في الذاكرة 6.\n3. جملة System.out.println(++a): تزيد قيمة a أولاً من 6 إلى 7 ثم تطبع القيمة الجديدة (7).\nإذن يُطبع 5 ثم 7."
+      },
+      {
+        id: "Q53", num: 53, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the result of prefix/postfix evaluation?",
+        code: "int x = 6, y = 6;\nint z = x++ * ++y;\nSystem.out.println(z);",
+        options: { A: "35", B: "42", C: "30", D: "48" },
+        correct: "B",
+        explanation: "🔍 تتبع المعادلة z = x++ * ++y:\n• x++ (Postfix): تُستخدم قيمة x القديمة في الضرب وهي 6 (ثم تصبح x = 7 بعد ذلك).\n• ++y (Prefix): تُزاد قيمة y أولاً من 6 إلى 7 ثم تُستخدم في الضرب.\n• إذن العملية الحسابية هي: z = 6 * 7 = 42."
+      },
+      {
+        id: "Q54", num: 54, chapter: 3, chapterTitle: "Ch 3: Operators",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: "int a = 5, b = 2;\nSystem.out.println(a + 10 > 12 && 3 * b == 6);",
+        options: { A: "true", B: "false", C: "12", D: "Compilation error" },
+        correct: "A",
+        explanation: "🔍 تتبع الأولويات خطوة بخطوة (العمليات الحسابية تسبق المقارنة، والمقارنة تسبق &&):\n1. الطرف الأيسر: a + 10 = 5 + 10 = 15، ثم نقارن: 15 > 12 ← النتيجة true.\n2. الطرف الأيمن: 3 * b = 3 * 2 = 6، ثم نقارن: 6 == 6 ← النتيجة true.\n3. نربط النتيجتين: true && true ← النتيجة النهائية true."
+      },
+
+      // ==================== CHAPTER 4: Scanner, Output, and Concatenation (Q55 - Q84) ====================
+      {
+        id: "Q55", num: 55, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What is printed when the variable name is inside double quotation marks?",
+        code: 'int score = 72;\nSystem.out.println("score");',
+        options: { A: "72", B: "score", C: '"72"', D: "Compilation error" },
+        correct: "B",
+        explanation: '✓ القاعدة الذهبية: أي شيء يُوضع داخل علامتي التنصيص المزدوجة " " يُعامله المترجم كنص حرفي (String literal) ويطبعه كما هو دون النظر لقيمة المتغير. لذا يُطبع score وليس 72.'
+      },
+      {
+        id: "Q56", num: 56, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What is printed without double quotes around the identifier?",
+        code: "int score = 72;\nSystem.out.println(score);",
+        options: { A: "score", B: '"score"', C: "72", D: "Compilation error" },
+        correct: "C",
+        explanation: "✓ السبب: هنا اسم المتغير score مكتوب بدون علامتي تنصيص، فيذهب البرنامج إلى الذاكرة ويجلب القيمة المخزنة بداخله وهي 72 ويطبعها."
+      },
+      {
+        id: "Q57", num: 57, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Which output is correct?",
+        code: 'String name = "Ahmad";\nSystem.out.println("name");',
+        options: { A: "name", B: "Ahmad", C: '"name"', D: "Compilation error" },
+        correct: "A",
+        explanation: '✓ السبب: وجود علامتي التنصيص حول "name" يجعله نصاً ثابتاً، فيطبع الكلمة name نفسها وليس محتوى المتغير Ahmad، كما أن علامتي التنصيص لا تظهران في المخرجات.'
+      },
+      {
+        id: "Q58", num: 58, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Which output is correct?",
+        code: 'String name = "Ahmad";\nSystem.out.println(name);',
+        options: { A: "name", B: '"Ahmad"', C: "Ahmad", D: "Compilation error" },
+        correct: "C",
+        explanation: "✓ السبب: لعدم وجود علامتي تنصيص حول name، يطبع البرنامج القيمة المخزنة داخل المتغير وهي Ahmad (دون علامات تنصيص)."
+      },
+      {
+        id: "Q59", num: 59, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Which result is printed by this expression?",
+        code: 'int count = 8;\nSystem.out.println("count = count");',
+        options: { A: "count = 8", B: "count = count", C: "8", D: "Compilation error" },
+        correct: "B",
+        explanation: '✓ السبب: العبارة بأكملها محصورة داخل علامتي تنصيص واحدة "count = count"، فتُطبع حرفياً كما هي ولا يتم استبدال كلمة count الثانية بالرقم 8.'
+      },
+      {
+        id: "Q60", num: 60, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What is printed?",
+        code: 'int x = 9;\nSystem.out.println("x + x");',
+        options: { A: "9", B: "x", C: '"x"', D: "x + x" },
+        correct: "D",
+        explanation: '✓ السبب: وجود علامتي التنصيص حول "x + x" يمنع إجراء عملية الجمع، ويُطبع النص x + x كما هو بالضبط.'
+      },
+      {
+        id: "Q61", num: 61, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Which output is correct?",
+        code: 'int a = 6, b = 8;\nSystem.out.println("a + b");',
+        options: { A: "14", B: "ab", C: "a + b", D: "Compilation error" },
+        correct: "C",
+        explanation: '✓ السبب: لأن "a + b" محصورة بين علامتي تنصيص، فهي مجرد نص (String) وليست معادلة رياضية، فتُطبع a + b كما هي.'
+      },
+      {
+        id: "Q62", num: 62, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: 'String name = "Ali";\nSystem.out.println("Hello " + name);',
+        options: { A: "HelloAli", B: "Hello Ali", C: "Hello+Ali", D: "Compilation error" },
+        correct: "B",
+        explanation: '✓ السبب: علامة + هنا تقوم بدمج النصوص (Concatenation). لاحظ وجود مسافة فارغة بعد كلمة Hello داخل علامتي التنصيص "Hello "، لذا عند دمجها مع "Ali" نحصل على Hello Ali بمسافة بينهما.'
+      },
+      {
+        id: "Q63", num: 63, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Choose the correct output.",
+        code: 'int count = 8;\nSystem.out.println("count = " + count);',
+        options: { A: "count = count", B: "count = 8", C: "8count", D: "Compilation error" },
+        correct: "B",
+        explanation: '✓ السبب: الجزء الأول "count = " هو نص ثابت يُطبع كما هو، ثم علامة + تدمج معه قيمة المتغير count (وهي 8)، فتكون النتيجة count = 8.'
+      },
+      {
+        id: "Q64", num: 64, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What is the exact printed result?",
+        code: 'int x = 5;\nSystem.out.println("x" + x);',
+        options: { A: "x5", B: "x", C: "5", D: '"x"' },
+        correct: "A",
+        explanation: '✓ السبب: "x" الأولى داخل علامتي تنصيص فتُطبع كحرف x، ثم + تدمجها مع قيمة المتغير x الثانية (وهي 5) دون مسافة، ليظهر الناتج x5.'
+      },
+      {
+        id: "Q65", num: 65, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What is printed using a String and an integer?",
+        code: 'int n = 10;\nSystem.out.println("Java" + n);',
+        options: { A: "Java10", B: "Java5", C: "15", D: "Compilation error" },
+        correct: "A",
+        explanation: '✓ السبب: عند استخدام + بين نص ("Java") ورقم (n = 10)، تتحول العملية إلى دمج نصي فيُطبع Java10 ملتصقين لعدم وجود مسافة.'
+      },
+      {
+        id: "Q66", num: 66, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: 'String first = "Java";\nString second = "Code";\nSystem.out.println(first + " " + second);',
+        options: { A: "Java Code", B: "JavaCode", C: "CodeJava", D: "Compilation error" },
+        correct: "A",
+        explanation: '✓ السبب: تم دمج المتغير first ("Java") ثم مسافة فارغة " " ثم المتغير second ("Code")، فيظهر الناتج Java Code بمسافة في المنتصف.'
+      },
+      {
+        id: "Q67", num: 67, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed by these two output statements?",
+        code: 'System.out.print("Hello");\nSystem.out.println("Java");',
+        options: { A: "HelloJava on one line", B: "Hello and Java on different lines", C: "JavaHello", D: "Nothing" },
+        correct: "A",
+        explanation: '✓ الفرق بين print و println:\n• السطر الأول يستخدم print("Hello")، فهو يطبع Hello ويبقي المؤشر على نفس السطر.\n• السطر الثاني يطبع Java مباشرة بجانبها على نفس السطر، فيظهر HelloJava on one line.'
+      },
+      {
+        id: "Q68", num: 68, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRUE / FALSE",
+        prompt: "The two statements print AB on the same line.",
+        code: 'System.out.print("A");\nSystem.out.println("B");',
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: '✓ الإجابة True: لأن الجملة الأولى print("A") لا تضيف سطراً جديداً بعد A، فتُطبع B بجانبها مباشرة على نفس السطر لتكون النتيجة AB.'
+      },
+      {
+        id: "Q69", num: 69, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "What does this code print?",
+        code: "int a = 6, b = 8;\nSystem.out.println(a + b);",
+        options: { A: "14", B: "68", C: "a + b", D: "a8" },
+        correct: "A",
+        explanation: "✓ السبب: لا يوجد أي نص (String) أو علامات تنصيص هنا؛ كلا الطرفين a و b أعداد صحيحة (int)، لذا تعمل + كعملية جمع حسابية: 6 + 8 = 14."
+      },
+      {
+        id: "Q70", num: 70, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method should read an integer such as 5?",
+        code: "Scanner input = new Scanner(System.in);\nint number = input._____();",
+        options: { A: "nextLine()", B: "nextInt()", C: "nextDouble()", D: "nextBoolean()" },
+        correct: "B",
+        explanation: "✓ قاعدة دوال Scanner:\n• لقراءة عدد صحيح (int) نستخدم nextInt().\n• nextLine() تقرأ سطراً نصياً، nextDouble() تقرأ عدداً عشرياً، و nextBoolean() تقرأ قيمة منطقية."
+      },
+      {
+        id: "Q71", num: 71, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method reads 15.5 into a double variable?",
+        code: "Scanner input = new Scanner(System.in);\ndouble price = input._____();",
+        options: { A: "nextInt()", B: "nextBoolean()", C: "nextDouble()", D: "next()" },
+        correct: "C",
+        explanation: "✓ السبب: بما أن المتغير price من نوع double والعدد 15.5 عشري، نستخدم الدالة nextDouble() من كائن Scanner."
+      },
+      {
+        id: "Q72", num: 72, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method is correct for the value true?",
+        code: "Scanner input = new Scanner(System.in);\nboolean member = input._____();",
+        options: { A: "nextBoolean()", B: "nextDouble()", C: "nextLong()", D: "next()" },
+        correct: "A",
+        explanation: "✓ السبب: لقراءة قيمة منطقية (true أو false) وتخزينها في متغير boolean، نستخدم الدالة nextBoolean()."
+      },
+      {
+        id: "Q73", num: 73, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method is intended to read a float value?",
+        code: "Scanner input = new Scanner(System.in);\nfloat measurement = input._____();",
+        options: { A: "nextLong()", B: "nextShort()", C: "nextFloat()", D: "nextBoolean()" },
+        correct: "C",
+        explanation: "✓ السبب: كل نوع بيانات أساسي له دالة مطابقة في Scanner: للنوع float نستخدم الدالة nextFloat()."
+      },
+      {
+        id: "Q74", num: 74, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method reads a single word such as Ahmad?",
+        code: "Scanner input = new Scanner(System.in);\nString name = input._____();",
+        options: { A: "next()", B: "nextInt()", C: "nextBoolean()", D: "nextByte()" },
+        correct: "A",
+        explanation: "✓ الفرق المهم في قراءة النصوص:\n• الدالة next() تقرأ كلمة واحدة فقط (Single word) وتتوقف بمجرد مصادفة مسافة فارغة.\n• أما nextLine() فتقرأ السطر كاملاً مع المسافات."
+      },
+      {
+        id: "Q75", num: 75, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "SELECT SCANNER METHOD",
+        prompt: "Which method reads a full name such as Ahmad Ali?",
+        code: "Scanner input = new Scanner(System.in);\nString fullName = input._____();",
+        options: { A: "nextInt()", B: "nextFloat()", C: "next()", D: "nextLine()" },
+        correct: "D",
+        explanation: "✓ السبب: الاسم الكامل Ahmad Ali يحتوي على مسافة بين الاسمين؛ لو استخدمنا next() فستقرأ Ahmad فقط وتترك Ali. لذا نستخدم nextLine() لقراءة السطر كاملاً."
+      },
+      {
+        id: "Q76", num: 76, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "COMPLETE THE CODE",
+        prompt: "Which line correctly creates a Scanner for keyboard input?",
+        code: "import java.util.Scanner;\n// Complete the following line:\n______",
+        options: {
+          A: "Scanner input = System.in;",
+          B: "Scanner input = new Scanner(System.in);",
+          C: "Scanner input = new Scanner();",
+          D: "Scanner input = nextInt();"
+        },
+        correct: "B",
+        explanation: "✓ الصيغة القياسية: لإنشاء كائن من كلاس Scanner يقرأ من لوحة المفاتيح (System.in) نستخدم الكلمة المفتاحية new هكذا: Scanner input = new Scanner(System.in);."
+      },
+      {
+        id: "Q77", num: 77, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the result?",
+        code: 'int a = 3, b = 4;\nSystem.out.println("A" + a + b);',
+        options: { A: "A34", B: "A7", C: "7A", D: "Compilation error" },
+        correct: "A",
+        explanation: '🔍 قاعدة التقييم من اليسار إلى اليمين (Left-to-Right):\n1. نبدأ من اليسار: "A" + a  ← بما أن "A" نص، تتحول + إلى دمج نصي، فيصبح الناتج "A3".\n2. نكمل: "A3" + b  ← بما أن "A3" نص، تبقى + دمجاً نصياً، فيصبح الناتج النهائي "A34" (وليس A7).'
+      },
+      {
+        id: "Q78", num: 78, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed? Follow evaluation from left to right.",
+        code: 'int x = 10, y = 20;\nSystem.out.println("Total = " + x + y);',
+        options: { A: "Total = 30", B: "Total = 1020", C: "Total = 10 20", D: "Compilation error" },
+        correct: "B",
+        explanation: '🔍 تتبع التنفيذ من اليسار لليمين:\n1. "Total = " + x  →  ينتج النص "Total = 10".\n2. "Total = 10" + y  →  يُدمج الرقم 20 كنص بجانب 10 ليصبح "Total = 1020".\n(للحصول على 30 يجب وضع x + y بين قوسين).'
+      },
+      {
+        id: "Q79", num: 79, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: 'int n = 5;\nSystem.out.println("Value: " + n + 3);',
+        options: { A: "Value: 8", B: "Value: 53", C: "Value: 5 + 3", D: "8Value:" },
+        correct: "B",
+        explanation: '🔍 تتبع التنفيذ من اليسار لليمين:\n1. "Value: " + n  →  ينتج النص "Value: 5".\n2. "Value: 5" + 3  →  بما أن الطرف الأيسر أصبح نصاً، تُدمج 3 بجانب 5 ليُطبع Value: 53.'
+      },
+      {
+        id: "Q80", num: 80, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "Select the printed result.",
+        code: 'int a = 3, b = 4;\nSystem.out.println(a + b + "A");',
+        options: { A: "7A", B: "34A", C: "A34", D: "Compilation error" },
+        correct: "A",
+        explanation: '🔍 قارن هذا السؤال مع Q77! التقييم يبدأ من اليسار لليمين:\n1. أول عملية هي a + b (أي 3 + 4): كلاهما أرقام، فتُجرى عملية جمع حسابية أولاً والناتج 7.\n2. بعدها 7 + "A": يُدمج الرقم 7 مع النص "A" ليُطبع 7A.'
+      },
+      {
+        id: "Q81", num: 81, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "Which output is correct?",
+        code: 'int x = 10, y = 20;\nSystem.out.println(x + y + " points");',
+        options: { A: "30 points", B: "1020 points", C: "10 + 20 points", D: "Compilation error" },
+        correct: "A",
+        explanation: '🔍 تتبع من اليسار لليمين:\n1. x + y (أي 10 + 20) تأتي في البداية قبل أي نص، فتُجمع حسابياً لتعطي 30.\n2. ثم يُدمج الناتج 30 مع النص " points" (لاحظ المسافة قبل points)، فيُطبع 30 points.'
+      },
+      {
+        id: "Q82", num: 82, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: 'int n = 12;\nSystem.out.println(n + 3 + "3");',
+        options: { A: "153", B: "123", C: "15", D: "Compilation error" },
+        correct: "A",
+        explanation: '🔍 تتبع خطوة بخطوة من اليسار لليمين:\n1. n + 3 = 12 + 3 = 15 (جمع حسابي لأن الطرفين أرقام).\n2. 15 + "3" = "153" (دمج نصي لأن "3" محصورة بين علامتي تنصيص).\nلذا يطبع البرنامج 153.'
+      },
+      {
+        id: "Q83", num: 83, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed when the numbers are grouped in parentheses?",
+        code: 'int x = 10, y = 20;\nSystem.out.println("Total = " + (x + y));',
+        options: { A: "Total = 1020", B: "Total = 30", C: "Total = 10 + 20", D: "Compilation error" },
+        correct: "B",
+        explanation: '✓ قاعدة الأولوية: الأقواس ( ) لها أعلى أولوية في التنفيذ؛ لذا يتم حساب (x + y) أولاً = 30، ثم يُدمج الناتج 30 مع النص "Total = " ليصبح الناتج Total = 30.'
+      },
+      {
+        id: "Q84", num: 84, chapter: 4, chapterTitle: "Ch 4: Scanner & Output",
+        topic: "TRACE: QUOTED NAME VS VALUE",
+        prompt: "Which answer includes the printed double quotation marks?",
+        code: 'int value = 25;\nSystem.out.println("\\"value\\"");',
+        options: { A: "25", B: '"25"', C: "value", D: '"value"' },
+        correct: "D",
+        explanation: '✓ السبب: التسلسل \\" يطبع علامة تنصيص مزدوجة فعلية على الشاشة، والكلمة value موجودة داخل النص فتُطبع كما هي (وليس 25). إذن الناتج الدقيق هو "value" شاملة علامتي التنصيص.'
+      },
+
+      // ==================== CHAPTER 5: Decision-Making and Code Tracing (Q85 - Q115) ====================
+      {
+        id: "Q85", num: 85, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CONDITION",
+        prompt: "Choose the missing condition to print Pass for mark = 65.",
+        code: 'int mark = 65;\nif (______) {\n    System.out.println("Pass");\n}',
+        options: { A: "mark < 50", B: "mark >= 50", C: "mark == 50", D: "mark != 65" },
+        correct: "B",
+        explanation: "✓ السبب: شرط النجاح القياسي هو أن تكون العلامة أكبر من أو تساوي 50 (mark >= 50)، وعند تعويض mark = 65 يكون الشرط 65 >= 50 صحيحاً فيطبع Pass."
+      },
+      {
+        id: "Q86", num: 86, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRUE / FALSE",
+        prompt: "The code prints END even though the condition is false.",
+        code: 'int score = 40;\nif (score >= 50)\n    System.out.print("Pass");\nSystem.out.print("END");',
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: '✓ الإجابة True: عندما تُكتب جملة if بدون أقواس حاصرة { }، فإنها تتحكم فقط في الجملة الأولى التي تليها مباشرة (طباعة "Pass"). أما جملة System.out.print("END"); فتقع خارج if وتُنفذ دائماً سواء تحقق الشرط أم لا.'
+      },
+      {
+        id: "Q87", num: 87, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRUE / FALSE",
+        prompt: "The code prints Only A.",
+        code: 'int n = 1;\nswitch (n) {\n    case 1: System.out.print("Only A"); break;\n    case 2: System.out.print("B");\n}',
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: '✓ الإجابة True: قيمة n تساوي 1، فيدخل التنفيذ إلى case 1 ويطبع "Only A"، ثم يصادف أمر break; فيخرج فوراً من جملة switch دون الوصول إلى case 2.'
+      },
+      {
+        id: "Q88", num: 88, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "The value matches no case. What is printed?",
+        code: 'int day = 8;\nswitch (day) {\n    case 1: System.out.print("One"); break;\n    case 2: System.out.print("Two"); break;\n    default: System.out.print("Other");\n}',
+        options: { A: "One", B: "Two", C: "Other", D: "Nothing" },
+        correct: "C",
+        explanation: "✓ القاعدة: في جملة switch، إذا لم تطابق قيمة المتغير (day = 8) أياً من الحالات المذكورة (case 1 أو case 2)، ينتقل التنفيذ تلقائياً إلى الفرع الافتراضي default ويطبع Other."
+      },
+      {
+        id: "Q89", num: 89, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What does the following switch print?",
+        code: 'int choice = 3;\nswitch (choice) {\n    case 1: System.out.print("Java"); break;\n    case 2: System.out.print("C++"); break;\n    case 3: System.out.print("Python"); break;\n    case 4: System.out.print("exit"); break;\n    default: System.out.print("Invalid");\n}',
+        options: { A: "Java", B: "C++", C: "Python", D: "exit" },
+        correct: "C",
+        explanation: "🔍 تتبع switch:\nقيمة المتغير choice هي 3، فتتطابق مع case 3: يُطبع النص Python ثم يوقف أمر break; تنفيذ باقي الحالات."
+      },
+      {
+        id: "Q90", num: 90, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed by the ternary expression?",
+        code: 'int age = 16;\nString type = (age >= 18) ? "Adult" : "Minor";\nSystem.out.println(type);',
+        options: { A: "Adult", B: "Minor", C: "true", D: "false" },
+        correct: "B",
+        explanation: '🔍 شرح المعامل الثلاثي (Ternary Operator ?:):\nالصيغة هي: (الشرط) ? القيمة_عند_الصواب : القيمة_عند_الخطأ.\n• الشرط (16 >= 18) نتيجته false.\n• لذا نأخذ القيمة التي بعد النقطتين : وهي "Minor".'
+      },
+      {
+        id: "Q91", num: 91, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed?",
+        code: 'int number = 24;\nString result = (number % 2 == 0) ? "Even" : "Odd";\nSystem.out.println(result);',
+        options: { A: "Even", B: "Odd", C: "true", D: "0" },
+        correct: "A",
+        explanation: '🔍 تتبع الشرط:\n• number % 2 == 0  →  24 % 2 يساوي 0، و 0 == 0 نتيجته true.\n• بما أن الشرط صحيح، يختار المعامل الثلاثي القيمة الأولى بعد علامة الاستفهام وهي "Even".'
+      },
+      {
+        id: "Q92", num: 92, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the output?",
+        code: "int i = -10;\nint k = (i < 0) ? -i : i;\nSystem.out.println(k);",
+        options: { A: "10", B: "-10", C: "-1", D: "0" },
+        correct: "A",
+        explanation: "🔍 تتبع حساب القيمة المطلقة:\n• قيمة i = -10.\n• الشرط (i < 0) أي (-10 < 0) صحيح (true).\n• ننفذ التعبير الأول -i: أي -(-10) = +10.\n• إذن k = 10 ويُطبع 10."
+      },
+      {
+        id: "Q93", num: 93, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRUE / FALSE",
+        prompt: "The following code prints Pass.",
+        code: 'int mark = 45;\nString result = mark >= 50 ? "Pass" : "Fail";\nSystem.out.print(result);',
+        options: { A: "True", B: "False" },
+        correct: "B",
+        explanation: '✓ الإجابة False: قيمة mark هي 45، والشرط 45 >= 50 غير متحقق (false)، لذا يختار المعامل الثلاثي القيمة الثانية "Fail" ويطبعها وليس "Pass".'
+      },
+      {
+        id: "Q94", num: 94, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CODE",
+        prompt: "What belongs in the blank to stop execution of later cases?",
+        code: 'int day = 2;\nswitch (day) {\n    case 1: System.out.print("Sunday"); break;\n    case 2: System.out.print("Monday"); ______\n    case 3: System.out.print("Tuesday"); break;\n}',
+        options: { A: "continue;", B: "else;", C: "break;", D: "stop;" },
+        correct: "C",
+        explanation: "✓ السبب: الكلمة المفتاحية break; هي المسؤولة عن الخروج من جملة switch ومنع سقوط التنفيذ (Fall-through) إلى case 3."
+      },
+      {
+        id: "Q95", num: 95, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "FIX THE CODE",
+        prompt: "Which single change fixes the invalid if condition?",
+        code: 'int mark = 50;\nif (mark = 50) System.out.println("Pass");',
+        options: { A: "Replace = with ==", B: "Replace if with switch", C: "Remove the parentheses", D: "Change int to double" },
+        correct: "A",
+        explanation: "✓ السبب: شرط جملة if في جافا يجب أن يعطي قيمة منطقية (boolean). كتابة mark = 50 هي عملية إسناد تعيد رقم int فيرفضها المترجم؛ واستبدال = بـ == يحولها إلى مقارنة منطقية صحيحة."
+      },
+      {
+        id: "Q96", num: 96, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "FIX THE CODE",
+        prompt: "What fixes the incorrect ternary statement?",
+        code: 'int age = 17;\nString group = (age >= 18) ? "Adult" ? "Minor";',
+        options: { A: "Replace ? with &&", B: "Replace : with ;", C: "Replace the second ? with :", D: "Remove the condition" },
+        correct: "C",
+        explanation: '✓ السبب: الصيغة الصحيحة للمعامل الثلاثي تستخدم علامة استفهام واحدة (?) ثم نقطتين رأسيتين (:). في الكود وُضعت علامتا استفهام، لذا نستبدل ? الثانية بـ : لتصبح: (age >= 18) ? "Adult" : "Minor";.'
+      },
+      {
+        id: "Q97", num: 97, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed after the if-else chain?",
+        code: 'int speed = 75;\nif (speed > 120) System.out.print("Speeding");\nelse if (speed >= 60) System.out.print("Normal");\nelse System.out.print("Too slow");',
+        options: { A: "Speeding", B: "Normal", C: "Too slow", D: "No output" },
+        correct: "B",
+        explanation: "🔍 تتبع سلسلة if - else if:\n1. speed = 75.\n2. الشرط الأول (75 > 120): خطأ، فنتجاوز Speeding.\n3. الشرط الثاني (75 >= 60): صحيح! فيُطبع Normal ولا يتم فحص else الأخيرة."
+      },
+      {
+        id: "Q98", num: 98, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the grade output?",
+        code: 'int score = 84;\nif (score >= 90) System.out.println("Grade: A");\nelse if (score >= 80) System.out.println("Grade: B");\nelse if (score >= 70) System.out.println("Grade: C");\nelse System.out.println("Grade: F");',
+        options: { A: "Grade: A", B: "Grade: B", C: "Grade: C", D: "Grade: F" },
+        correct: "B",
+        explanation: "🔍 تتبع الشروط بالترتيب من الأعلى للأسفل:\n1. 84 >= 90 ← خطأ.\n2. 84 >= 80 ← صحيح! يُطبع Grade: B وتتوقف السلسلة فوراً (رغم أن 84 >= 70 صحيح أيضاً، لكن else if لا تُنفذ بعد تحقق فرع سابق)."
+      },
+      {
+        id: "Q99", num: 99, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CONDITION",
+        prompt: "Which condition correctly checks the middle speed range?",
+        code: 'int speed = 85;\nif (speed > 120) System.out.print("Speeding");\nelse if (______) System.out.print("Normal");\nelse System.out.print("Too slow");',
+        options: { A: "speed < 60", B: "speed > 120", C: "speed >= 60", D: "speed == 120" },
+        correct: "C",
+        explanation: "✓ السبب: بما أن السرعات الأكبر من 120 تم اصطيادها في الشرط الأول، فإن كتابة speed >= 60 في else if تغطي جميع السرعات من 60 إلى 120 وتطبع Normal."
+      },
+      {
+        id: "Q100", num: 100, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CONDITION",
+        prompt: "Fill in the condition so both conditions must be satisfied.",
+        code: 'int attendance = 81, mark = 43;\nif (______)\n    System.out.println("Eligible");',
+        options: { A: "attendance >= 75 || mark >= 40", B: "attendance >= 75 && mark >= 40", C: "attendance == 75", D: "attendance < 75 && mark < 40" },
+        correct: "B",
+        explanation: "✓ السبب: المطلوب تحقق الشرطين معاً (نسبة الحضور >= 75 والعلامة >= 40)، لذا نربطهما بمعامل الوصل المنطقي && (AND) وليس || (OR)."
+      },
+      {
+        id: "Q101", num: 101, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CONDITION",
+        prompt: "Choose the condition for a positive EVEN number.",
+        code: 'int number = 12;\nif (______)\n    System.out.print("Positive Even");',
+        options: { A: "number % 2 != 0", B: "number > 0 && number % 2 == 0", C: "number < 0", D: "number > 0 || number % 2 != 0" },
+        correct: "B",
+        explanation: "✓ تحليل الشرط إلى جزأين:\n1. عدد موجب (Positive): يعني أكبر من الصفر (number > 0).\n2. عدد زوجي (Even): يعني يقبل القسمة على 2 دون باقٍ (number % 2 == 0).\n3. نربطهما بـ && ليتحققا معاً."
+      },
+      {
+        id: "Q102", num: 102, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CODE",
+        prompt: "Choose the correct ternary operator expression.",
+        code: "int n = 7;\nString text = ______;\nSystem.out.println(text);",
+        options: { A: 'n % 2 == 0 : "Even" ? "Odd"', B: 'n % 2 == 0 ? "Even" : "Odd"', C: 'n % 2 == 0 ? "Even"', D: 'n % 2 == 0 : "Odd"' },
+        correct: "B",
+        explanation: '✓ القاعدة: المعامل الثلاثي يبدأ بالشرط (n % 2 == 0)، يليه علامة الاستفهام (?)، ثم النتيجة عند الصواب ("Even")، ثم النقطتان (:)، ثم النتيجة عند الخطأ ("Odd").'
+      },
+      {
+        id: "Q103", num: 103, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the final printed salary?",
+        code: "double salary = 440;\nint age = 61;\nif (salary < 500) salary += 30;\nif (age > 60) salary += 20;\nSystem.out.println(salary);",
+        options: { A: "470.0", B: "490.0", C: "500.0", D: "520.0" },
+        correct: "B",
+        explanation: "🔍 انتبه! هاتان جملتا if مستقلتان وليستا if / else if:\n1. البداية: salary = 440.0.\n2. الجملة الأولى: هل 440 < 500؟ نعم ← نزيد 30 فيصبح الراتب 470.0.\n3. الجملة الثانية (تُفحص أيضاً لأنها مستقلة): هل 61 > 60؟ نعم ← نزيد 20 فيصبح الراتب 490.0."
+      },
+      {
+        id: "Q104", num: 104, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "COMPLETE THE CODE",
+        prompt: "Which line correctly shares one output for grades B and C?",
+        code: 'switch (grade) {\n    case \'A\': System.out.print("Excellent"); break;\n    ______ System.out.print("Good"); break;\n    default: System.out.print("Invalid");\n}',
+        options: { A: "case 'B'; case 'C':", B: "case 'B': case 'C':", C: "case 'B' || 'C':", D: "case ('B', 'C'):" },
+        correct: "B",
+        explanation: "✓ قاعدة تجميع الحالات في switch: نكتب كل حالة بكلمة case متبوعة بالقيمة ونقطتين رأسيتين (:) الواحدة تلو الأخرى هكذا: case 'B': case 'C': (لا يُسمح باستخدام || أو الفواصل داخل case)."
+      },
+      {
+        id: "Q105", num: 105, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRUE / FALSE",
+        prompt: "The output is Good.",
+        code: 'char grade = \'B\';\nswitch (grade) {\n    case \'B\':\n    case \'C\': System.out.print("Good"); break;\n    default: System.out.print("Other");\n}',
+        options: { A: "True", B: "False" },
+        correct: "A",
+        explanation: "✓ الإجابة True: قيمة grade هي 'B'، وبما أن case 'B': لا تحتوي على أوامر أو break فإن التنفيذ ينساب مباشرة إلى case 'C': ويطبع Good ثم يتوقف عند break;."
+      },
+      {
+        id: "Q106", num: 106, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "Choose the two-line output.",
+        code: 'char grade = \'C\';\nswitch (grade) {\n    case \'A\': System.out.println("Excellent!"); break;\n    case \'B\':\n    case \'C\': System.out.println("Well done"); break;\n    default: System.out.println("Invalid grade");\n}\nSystem.out.println("Your grade is " + grade);',
+        options: {
+          A: "Well done / Your grade is C",
+          B: "Excellent! / Your grade is C",
+          C: "Invalid grade / Your grade is C",
+          D: "Well done / Your grade is B"
+        },
+        correct: "A",
+        explanation: '🔍 تتبع التنفيذ سطراً بسطر:\n1. قيمة grade هي \'C\'، فتدخل إلى case \'C\': وتطبع السطر الأول: Well done ثم تخرج من switch بفضل break;.\n2. الجملة الأخيرة تقع بعد نهاية قوس switch، فتُنفذ دائماً وتطبع السطر الثاني: Your grade is C.'
+      },
+      {
+        id: "Q107", num: 107, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "FIX THE CODE",
+        prompt: "How should the following code be corrected?",
+        code: 'int number = 2;\nswitch (number) {\n    case 2: System.out.print("A"); break;\n    case 2: System.out.print("B"); break;\n}',
+        options: { A: "Replace case 2: with case 1:", B: "Replace case 2: with case 3:", C: "Remove switch(number)", D: "Change break to continue" },
+        correct: "B",
+        explanation: "✓ السبب: تمنع لغة جافا تكرار نفس قيمة case مرتين داخل جملة switch واحدة (Duplicate case label). استبدال case 2: الثانية بقيمة مختلفة مثل case 3: (كما في الخيار B) يزيل خطأ الترجمة."
+      },
+      {
+        id: "Q108", num: 108, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TERNARY / IF EQUIVALENCE",
+        prompt: "Which if-else code has the same meaning as the following ternary expression?",
+        code: 'int mark = 64;\nString result = (mark >= 50) ? "Pass" : "Fail";',
+        options: {
+          A: 'if (mark >= 50) result = "Pass"; else result = "Fail";',
+          B: 'if (mark >= 50) result = "Fail"; else result = "Pass";',
+          C: 'if (mark == 50) result = "Fail"; else result = "Pass";',
+          D: 'if (mark < 50) result = "Pass"; else result = "Fail";'
+        },
+        correct: "A",
+        explanation: '✓ قاعدة التحويل بين Ternary و if-else:\n• الشرط (mark >= 50) يصبح شرط if.\n• القيمة الأولى بعد ? ("Pass") تصبح جملة if.\n• القيمة الثانية بعد : ("Fail") تصبح جملة else.'
+      },
+      {
+        id: "Q109", num: 109, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the output of this nested if?",
+        code: 'int number = 11;\nif (number > 0) {\n    if (number % 2 == 0)\n        System.out.println("Positive Even Number");\n    else\n        System.out.println("Positive Odd Number");\n} else System.out.println("Number is not positive");',
+        options: { A: "Positive Odd Number", B: "Positive Even Number", C: "Number is not positive", D: "No output" },
+        correct: "A",
+        explanation: "🔍 تتبع جملة if المتداخلة (Nested if):\n1. الشرط الخارجي: هل 11 > 0؟ نعم (true)، فندخل داخل الأقواس { }.\n2. الشرط الداخلي: هل 11 % 2 == 0؟ (باقي قسمة 11 على 2 هو 1 وليس 0) إذن خطأ (false).\n3. ننتقل إلى else الداخلية ونطبع Positive Odd Number."
+      },
+      {
+        id: "Q110", num: 110, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "Which message appears?",
+        code: 'double amount = 125;\nboolean isMember = false;\nif (amount >= 100) {\n    if (isMember) System.out.print("20% discount");\n    else System.out.print("10% discount");\n} else System.out.print("No discount");',
+        options: { A: "20% discount", B: "10% discount", C: "No discount", D: "Both discounts" },
+        correct: "B",
+        explanation: "🔍 تتبع الشروط المتداخلة:\n1. الشرط الخارجي: هل amount >= 100 (أي 125 >= 100)؟ نعم، فندخل للكتلة الداخلية.\n2. الشرط الداخلي: هل isMember صحيح؟ قيمته false، لذا نتجاوز 20% discount وننفذ else الداخلية فنطبع 10% discount."
+      },
+      {
+        id: "Q111", num: 111, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is printed when the switch starts at case 20?",
+        code: 'int number = 20;\nswitch (number) {\n    case 10: System.out.print("Ten"); break;\n    case 20: System.out.print("Twenty");\n    case 30: System.out.print("Thirty"); break;\n    default: System.out.print("Other");\n}',
+        options: { A: "Twenty", B: "Twenty Thirty", C: "ThirtyOther", D: "Twenty Thirty Other" },
+        correct: "B",
+        explanation: "🔍 ظاهرة السقوط التلقائي (Fall-through):\n1. قيمة number = 20، فيبدأ التنفيذ من case 20 ويطبع Twenty.\n2. لاحظ عدم وجود break; في نهاية case 20! لذا يستمر التنفيذ تلقائياً إلى case 30 ويطبع Thirty.\n3. عند case 30 يوجد break; فيتوقف التنفيذ قبل default."
+      },
+      {
+        id: "Q112", num: 112, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What is the exact output?",
+        code: 'int n = 2;\nswitch (n) {\n    case 1: System.out.print("A");\n    case 2: System.out.print("B");\n    case 3: System.out.print("C");\n    default: System.out.print("D");\n}',
+        options: { A: "BC", B: "BCD", C: "B", D: "CD" },
+        correct: "B",
+        explanation: "🔍 تتبع Fall-through بدون أي break:\n1. نبدأ من عند الحالة المطابقة فقط وهي case 2 (نتجاهل case 1).\n2. يطبع B، ولعدم وجود break يكمل إلى case 3 ويطبع C، ولعدم وجود break يكمل إلى default ويطبع D.\n3. جميعها تستخدم print بدون مسافات، فيظهر الناتج BCD."
+      },
+      {
+        id: "Q113", num: 113, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "What does this grouped-case switch print?",
+        code: 'char grade = \'B\';\nswitch (grade) {\n    case \'A\': System.out.print("Excellent"); break;\n    case \'B\':\n    case \'C\': System.out.print("Average");\n    default: System.out.print("Done");\n}',
+        options: { A: "Average", B: "AverageDone", C: "Done", D: "Invalid Done" },
+        correct: "B",
+        explanation: "🔍 انتبه لعدم وجود break بعد case 'C':\n1. قيمة grade هي 'B'، فينتقل التنفيذ إلى case 'C' ويطبع Average.\n2. لعدم وجود break; بعد جملة طباعة Average، يسقط التنفيذ تلقائياً إلى default ويطبع Done بجانبها مباشرة ليصبح الناتج AverageDone."
+      },
+      {
+        id: "Q114", num: 114, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "Which message does the program display?",
+        code: 'int passcode = 1234, cardId = 55;\nint fingerprintId = 0;\nif (passcode == 1234 && cardId > 0) {\n    if (cardId == 55 || fingerprintId > 0)\n        System.out.print("Door Unlocked!");\n    else System.out.print("Invalid Card");\n} else System.out.print("Wrong Passcode");',
+        options: { A: "Door Unlocked!", B: "Invalid Card", C: "Wrong Passcode", D: "No output" },
+        correct: "A",
+        explanation: "🔍 تتبع نظام القفل خطوة بخطوة:\n1. الشرط الخارجي: passcode == 1234 (صحيح) && cardId > 0 (55 > 0 صحيح) ← النتيجة true، فندخل لـ if الداخلية.\n2. الشرط الداخلي: cardId == 55 (صحيح) || fingerprintId > 0 (خطأ) ← لأن الرابط || يكفيه طرف واحد صحيح، فالنتيجة true.\n3. يُطبع Door Unlocked!."
+      },
+      {
+        id: "Q115", num: 115, chapter: 5, chapterTitle: "Ch 5: Decision-Making",
+        topic: "TRACE OUTPUT",
+        prompt: "Select the correct output of both print statements.",
+        code: 'int pin = 4567, card = 20, level = 0;\nif (pin == 4567 && card > 0) {\n    level += 1;\n    if (card == 20 || card == 0) level += 2;\n}\nSystem.out.println(level);\nif (level == 3) System.out.println("Unlocked");\nelse System.out.println("Denied");',
+        options: { A: "3 then Unlocked", B: "1 then Denied", C: "2 then Denied", D: "3 then Denied" },
+        correct: "A",
+        explanation: "🔍 تتبع المتغير level خطوة بخطوة:\n1. البداية: level = 0.\n2. الشرط الخارجي (4567 == 4567 && 20 > 0) صحيح ← يزيد level بمقدار 1 ليصبح 1.\n3. الشرط الداخلي (card == 20 || card == 0) صحيح ← يزيد level بمقدار 2 ليصبح 3.\n4. الطباعة الأولى: تطبع قيمة level وهي 3.\n5. الطباعة الثانية: بما أن level == 3 صحيح، يطبع Unlocked.\nإذن المخرجات: 3 ثم Unlocked."
+      }
+    ];
+
+    /**
+     * Comprehensive Offline Java/CS & General English Dictionary for Selection Translation
+     * Covers every technical term, verb, noun, and phrase across Q01 - Q115.
+     */
+    const OFFLINE_DICTIONARY = {
+      // Multi-word CS & Exam Phrases
+      "basic concept": "مفهوم أساسي",
+      "basic components": "المكونات الأساسية",
+      "high-level": "عالي المستوى (قريب من لغة البشر)",
+      "high-level programming language": "لغة برمجة عالية المستوى",
+      "machine code": "كود الآلة",
+      "machine language": "لغة الآلة",
+      "binary instructions": "تعليمات ثنائية (أصفار وآحاد)",
+      "cpu registers": "مسجلات المعالج",
+      "translation diagram": "مخطط الترجمة",
+      "source code": "الكود المصدري",
+      "program execution": "تنفيذ البرنامج",
+      "basic computer operations": "العمليات الأساسية للحاسوب",
+      "software runtime": "بيئة تشغيل برمجية",
+      "physical hardware": "عتاد مادي ملموس",
+      "java bytecode": "كود بايت جافا",
+      "bytecode": "كود البايت (الشفرة الوسيطة)",
+      "source-code comment": "تعليق في الكود المصدري",
+      "single-line comments": "التعليقات ذات السطر الواحد",
+      "data type": "نوع البيانات",
+      "data types": "أنواع البيانات",
+      "data type selection": "اختيار نوع البيانات",
+      "data type category": "فئة نوع البيانات",
+      "declare the variable": "تعريف (الإعلان عن) المتغير",
+      "whole number": "عدد صحيح",
+      "single letter": "حرف واحد",
+      "one character": "حرف واحد",
+      "decimal number": "عدد عشري",
+      "new line": "سطر جديد",
+      "escape sequence": "تسلسل الهروب (رموز التنسيق الخاصة)",
+      "escape sequences": "تسلسلات الهروب",
+      "public class": "فئة (كلاس) عامة",
+      "non-primitive": "غير أساسي (مرجعي)",
+      "reference type": "نوع مرجعي",
+      "primitive data type": "نوع بيانات أساسي",
+      "primitive data types": "أنواع البيانات الأساسية",
+      "arithmetic operator": "معامل حسابي",
+      "boolean literal": "قيمة منطقية ثابتة",
+      "main method": "الدالة الرئيسية (نقطة بداية التشغيل)",
+      "operator meaning": "معنى المعامل",
+      "greater than": "أكبر من",
+      "less than": "أصغر من",
+      "greater than or equal": "أكبر من أو يساوي",
+      "less than or equal": "أصغر من أو يساوي",
+      "not equal": "لا يساوي",
+      "logical conditions": "شروط منطقية",
+      "quick practice": "تدريب سريع",
+      "trace output": "تتبع المخرجات",
+      "compilation error": "خطأ في الترجمة (أثناء الـ Compile)",
+      "assignment operations": "عمليات الإسناد",
+      "prefix": "سابق (قبل المتغير مثل ++x)",
+      "postfix": "لاحق (بعد المتغير مثل x++)",
+      "double quotation marks": "علامتا تنصيص مزدوجة",
+      "double quotes": "علامتا تنصيص مزدوجة",
+      "quoted name": "اسم محصور بين علامتي تنصيص",
+      "single word": "كلمة واحدة",
+      "full name": "الاسم الكامل",
+      "keyboard input": "إدخال من لوحة المفاتيح",
+      "left to right": "من اليسار إلى اليمين",
+      "grouped in parentheses": "مجمّعة داخل أقواس",
+      "decision-making": "اتخاذ القرار (الجمل الشرطية)",
+      "complete the condition": "أكمل الشرط",
+      "complete the code": "أكمل الكود",
+      "fix the code": "صحّح الخطأ في الكود",
+      "ternary expression": "تعبير المعامل الثلاثي (?:)",
+      "ternary operator": "المعامل الثلاثي (?:)",
+      "ternary statement": "جملة المعامل الثلاثي",
+      "later cases": "الحالات اللاحقة",
+      "if-else chain": "سلسلة شروط if-else",
+      "middle speed range": "نطاق السرعة المتوسط",
+      "positive even": "موجب وزوجي",
+      "two-line output": "مخرجات من سطرين",
+      "nested if": "جملة if متداخلة (شرط داخل شرط)",
+      "grouped-case": "حالات مجمّعة في switch",
+      "fall-through": "استمرار التنفيذ للحالات التالية لعدم وجود break",
+      "print statements": "جمل الطباعة",
+
+      // Single Words (Nouns, Verbs, Adjectives, Prepositions)
+      "pair": "زوج / ثنائي",
+      "describes": "يصف",
+      "two": "اثنان",
+      "basic": "أساسي",
+      "components": "مكونات",
+      "component": "مكون",
+      "computer": "حاسوب",
+      "programs": "برامج",
+      "program": "برنامج",
+      "variables": "متغيرات",
+      "variable": "متغير",
+      "hardware": "المكونات المادية (العتاد)",
+      "software": "البرمجيات",
+      "compiler": "المترجم (يحول الكود المصدري)",
+      "source": "مصدر",
+      "code": "شفرة برمجية / كود",
+      "input": "إدخال",
+      "output": "إخراج / مخرجات",
+      "processing": "معالجة",
+      "storage": "تخزين",
+      "string": "نص (سلسلة نصية)",
+      "following": "التالي",
+      "language": "لغة",
+      "programming": "برمجة",
+      "machine": "آلة",
+      "binary": "ثنائي (0 و 1)",
+      "instructions": "تعليمات",
+      "level": "مستوى",
+      "uses": "يستخدم",
+      "made": "مكوّن / مصنوع",
+      "assembly": "لغة التجميع",
+      "diagram": "مخطط / رسم توضيحي",
+      "where": "أين / حيث",
+      "programmer": "مبرمج",
+      "programmer's": "الخاص بالمبرمج",
+      "written": "مكتوب",
+      "execution": "تنفيذ",
+      "only": "فقط",
+      "tool": "أداة",
+      "translates": "يترجم / يحول",
+      "into": "إلى",
+      "another": "آخر",
+      "form": "شكل / صيغة",
+      "scanner": "ماسح / أداة قراءة المدخلات (Scanner)",
+      "printer": "طابعة",
+      "monitor": "شاشة",
+      "four": "أربعة",
+      "operations": "عمليات",
+      "writing": "كتابة",
+      "compiling": "ترجمة الكود",
+      "linking": "ربط",
+      "deleting": "حذف",
+      "classes": "فئات (Classes)",
+      "methods": "دوال (Methods)",
+      "objects": "كائنات (Objects)",
+      "statement": "جملة برمجية / عبارة",
+      "statements": "جمل برمجية",
+      "interpreter": "المفسر (ينفذ الكود سطراً بسطر)",
+      "matches": "يطابق",
+      "chapter": "فصل",
+      "physical": "مادي / ملموس",
+      "executes": "ينفذ / يشغل",
+      "through": "من خلال / عبر",
+      "runtime": "وقت التشغيل / بيئة التنفيذ",
+      "displays": "يعرض / يطبع",
+      "printed": "مطبوع / يُطبع",
+      "text": "نص",
+      "environment": "بيئة",
+      "jvm": "آلة جافا الافتراضية (Java Virtual Machine)",
+      "identifier": "معرّف (اسم متغير أو كلاس)",
+      "identifiers": "المعرّفات (أسماء المتغيرات)",
+      "comment": "تعليق برمجي",
+      "comments": "تعليقات برمجية",
+      "method": "دالة",
+      "according": "وفقاً لـ / حسب",
+      "order": "ترتيب",
+      "correct": "صحيح",
+      "single-line": "سطر واحد",
+      "begin": "تبدأ",
+      "uppercase": "أحرف كبيرة (Capital)",
+      "lowercase": "أحرف صغيرة (Small)",
+      "letters": "أحرف",
+      "letter": "حرف",
+      "treated": "تُعامل",
+      "different": "مختلفة",
+      "true": "صحيح / صواب",
+      "false": "خطأ",
+      "declaration": "تعريف / تصريح عن متغير",
+      "declare": "عرّف / أعلن عن",
+      "age": "عمر",
+      "named": "يُسمى",
+      "student": "طالب",
+      "hold": "يحتوي / يخزن",
+      "whole": "كامل / صحيح",
+      "number": "رقم / عدد",
+      "numbers": "أرقام",
+      "correctly": "بشكل صحيح",
+      "stores": "يخزن",
+      "store": "يخزن",
+      "passed": "ناجح / اجتاز",
+      "line": "سطر",
+      "ready": "جاهز",
+      "choose": "اختر",
+      "word": "كلمة",
+      "character": "حرف / رمز",
+      "initial": "الحرف الأول",
+      "valid": "صالح / صحيح",
+      "invalid": "غير صالح / خاطئ",
+      "grade": "علامة / تقدير",
+      "decimal": "عشري",
+      "price": "سعر",
+      "prints": "يطبع",
+      "print": "اطبع / طباعة",
+      "starts": "يبدأ",
+      "escape": "هروب",
+      "sequence": "تسلسل",
+      "inside": "داخل",
+      "file": "ملف",
+      "saved": "محفوظ",
+      "class": "فئة (Class)",
+      "public": "عام",
+      "name": "اسم",
+      "must": "يجب",
+      "primitive": "أساسي / أولي",
+      "reference": "مرجعي",
+      "category": "فئة / تصنيف",
+      "list": "قائمة",
+      "contains": "تحتوي على",
+      "float": "عدد عشري (Float)",
+      "value": "قيمة",
+      "values": "قيم",
+      "compiles": "يُترجم بنجاح بدون أخطاء",
+      "population": "تعداد السكان",
+      "complete": "أكمل",
+      "conventional": "تقليدي / قياسي",
+      "shown": "موضح / معروض",
+      "slides": "شرائح العرض",
+      "operator": "معامل",
+      "operators": "معاملات",
+      "meaning": "معنى",
+      "returns": "يعيد / يُرجع",
+      "remainder": "باقي القسمة",
+      "after": "بعد",
+      "division": "قسمة",
+      "adds": "يضيف / يجمع",
+      "subtracts": "يطرح / ينقص",
+      "multiplies": "يضرب",
+      "sets": "يضبط / يعيّن",
+      "zero": "صفر",
+      "test": "يختبر",
+      "greater": "أكبر",
+      "less": "أصغر",
+      "equal": "يساوي",
+      "assigns": "يسند قيمة",
+      "compares": "يقارن",
+      "equality": "تساوي",
+      "inequality": "عدم تساوي",
+      "means": "يعني",
+      "both": "كلاهما",
+      "logical": "منطقي",
+      "conditions": "شروط",
+      "condition": "شرط",
+      "completes": "يكمل",
+      "calculation": "عملية حسابية",
+      "becomes": "يصبح",
+      "result": "نتيجة",
+      "trace": "تتبّع",
+      "member": "عضو",
+      "compilation": "ترجمة الكود",
+      "error": "خطأ",
+      "display": "يعرض",
+      "even": "زوجي / حتى لو",
+      "odd": "فردي",
+      "though": "بالرغم من",
+      "evaluation": "تقييم / حساب",
+      "fingerprint": "بصمة الإصبع",
+      "card": "بطاقة",
+      "door": "باب",
+      "pin": "الرمز السري",
+      "points": "نقاط",
+      "total": "المجموع",
+      "count": "العداد",
+      "city": "مدينة",
+      "rate": "معدل / نسبة",
+      "integers": "أعداد صحيحة",
+      "same": "نفس",
+      "different": "مختلف",
+      "select": "اختر / حدد",
+      "read": "يقرأ",
+      "reads": "يقرأ",
+      "such": "مثل",
+      "intended": "مخصص لـ",
+      "measurement": "قياس",
+      "single": "مفرد / واحد",
+      "full": "كامل",
+      "creates": "ينشئ",
+      "keyboard": "لوحة المفاتيح",
+      "follow": "اتبع",
+      "left": "يسار",
+      "right": "يمين",
+      "grouped": "مجمّع",
+      "parentheses": "أقواس هلالية ( )",
+      "includes": "يتضمن / يشمل",
+      "missing": "مفقود / ناقص",
+      "pass": "ناجح",
+      "fail": "راسب",
+      "mark": "علامة",
+      "score": "درجة / نتيجة",
+      "matches": "يطابق",
+      "default": "الافتراضي",
+      "choice": "خيار",
+      "adult": "بالغ",
+      "minor": "قاصر",
+      "belongs": "ينتمي / يوضع",
+      "blank": "فراغ",
+      "stop": "إيقاف",
+      "later": "لاحقة",
+      "cases": "حالات",
+      "fix": "أصلح",
+      "fixes": "يصلح",
+      "change": "تغيير",
+      "replace": "استبدل",
+      "remove": "احذف / أزل",
+      "incorrect": "غير صحيح",
+      "chain": "سلسلة",
+      "speed": "سرعة",
+      "speeding": "مسرع",
+      "normal": "طبيعي",
+      "slow": "بطيء",
+      "checks": "يفحص / يتحقق من",
+      "middle": "متوسط / أوسط",
+      "range": "نطاق / مدى",
+      "fill": "املأ",
+      "satisfied": "متحققة",
+      "attendance": "حضور",
+      "eligible": "مؤهل",
+      "positive": "موجب",
+      "final": "نهائي",
+      "salary": "راتب",
+      "shares": "يشارك",
+      "equivalence": "تكافؤ / تطابق في المعنى",
+      "meaning": "معنى",
+      "nested": "متداخل",
+      "message": "رسالة",
+      "appears": "تظهر",
+      "amount": "مبلغ / كمية",
+      "discount": "خصم",
+      "passcode": "رمز المرور",
+      "unlocked": "مفتوح",
+      "denied": "مرفوض"
+    };
+
+    // ==================== STATE MANAGEMENT ====================
+    const STORAGE_KEY = "java_review_quiz_state_v1";
+
+    const DEFAULT_STATE = {
+      theme: "dark",
+      fontScale: 0,          // -1 (small), 0 (normal), 1 (large), 2 (xl)
+      chapterFilter: "all",  // "all", "1", "2", "3", "4", "5"
+      mode: "quiz",          // "quiz", "study", "wrong", "bookmarked"
+      searchQuery: "",
+      shuffled: false,
+      shuffleOrder: [],      // Array of question nums
+      currentIndex: 0,       // Index within filtered list
+      answers: {},           // { "Q01": "B", ... }
+      bookmarks: {}          // { "Q01": true, ... }
+    };
+
+    let state = loadState();
+    let filteredQuestions = [];
+    let selectionDebounceTimer = null;
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_STATE };
+        const parsed = JSON.parse(raw);
+        return {
+          ...DEFAULT_STATE,
+          ...parsed,
+          answers: parsed.answers || {},
+          bookmarks: parsed.bookmarks || {},
+          shuffleOrder: Array.isArray(parsed.shuffleOrder) ? parsed.shuffleOrder : []
+        };
+      } catch (e) {
+        return { ...DEFAULT_STATE };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {
+        // Ignore storage quota errors safely
+      }
+    }
+
+    // ==================== SYNTAX HIGHLIGHTER (Single-Pass Tokenizer) ====================
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function highlightJavaCode(rawCode) {
+      if (!rawCode) return "";
+      // Single-pass regex matching comments, strings, chars, blanks (3+ underscores), keywords, types, numbers
+      const tokenRegex = /(\/\/[^\n]*)|("(?:\\.|[^"\\])*")|('(?:\\.|[^'\\])*')|(_{3,})|\b(public|private|protected|class|static|void|int|double|float|long|short|byte|char|boolean|if|else|switch|case|default|break|continue|new|import|true|false|return)\b|\b(String|Scanner|System|Math|Object|Array)\b|\b(\d+(?:\.\d+)?[fFlL]?)\b/g;
+
+      let result = "";
+      let lastIndex = 0;
+      let match;
+
+      while ((match = tokenRegex.exec(rawCode)) !== null) {
+        // Append plain escaped text before token
+        if (match.index > lastIndex) {
+          result += escapeHtml(rawCode.slice(lastIndex, match.index));
+        }
+
+        const full = match[0];
+        if (match[1]) {
+          result += `<span class="tok-comment">${escapeHtml(full)}</span>`;
+        } else if (match[2] || match[3]) {
+          result += `<span class="tok-string">${escapeHtml(full)}</span>`;
+        } else if (match[4]) {
+          result += `<span class="tok-blank">${escapeHtml(full)}</span>`;
+        } else if (match[5]) {
+          result += `<span class="tok-keyword">${escapeHtml(full)}</span>`;
+        } else if (match[6]) {
+          result += `<span class="tok-type">${escapeHtml(full)}</span>`;
+        } else if (match[7]) {
+          result += `<span class="tok-number">${escapeHtml(full)}</span>`;
+        } else {
+          result += escapeHtml(full);
+        }
+
+        lastIndex = tokenRegex.lastIndex;
+      }
+
+      if (lastIndex < rawCode.length) {
+        result += escapeHtml(rawCode.slice(lastIndex));
+      }
+
+      return result;
+    }
+
+    // ==================== FILTERING & ORDERING ====================
+    function getOrderedBaseQuestions() {
+      if (!state.shuffled || state.shuffleOrder.length !== QUESTIONS_DB.length) {
+        return [...QUESTIONS_DB];
+      }
+      const mapByNum = new Map(QUESTIONS_DB.map(q => [q.num, q]));
+      return state.shuffleOrder.map(num => mapByNum.get(num)).filter(Boolean);
+    }
+
+    function computeFilteredQuestions() {
+      const base = getOrderedBaseQuestions();
+      const qSearch = (state.searchQuery || "").trim().toLowerCase();
+
+      return base.filter(q => {
+        // Chapter Filter
+        if (state.chapterFilter !== "all" && String(q.chapter) !== String(state.chapterFilter)) {
+          return false;
+        }
+        // Mode Filter
+        if (state.mode === "wrong") {
+          const userAns = state.answers[q.id];
+          if (!userAns || userAns === q.correct) return false;
+        }
+        if (state.mode === "bookmarked") {
+          if (!state.bookmarks[q.id]) return false;
+        }
+        // Search Filter
+        if (qSearch) {
+          const haystack = [
+            q.id,
+            q.topic,
+            q.prompt,
+            q.code || "",
+            q.explanation || "",
+            ...Object.values(q.options)
+          ].join(" ").toLowerCase();
+          if (!haystack.includes(qSearch)) return false;
+        }
+        return true;
+      });
+    }
+
+    function generateShuffleOrder() {
+      const nums = QUESTIONS_DB.map(q => q.num);
+      for (let i = nums.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+      }
+      state.shuffleOrder = nums;
+    }
+
+    // ==================== THEME & FONT SCALING ====================
+    function applyTheme() {
+      const htmlEl = document.documentElement;
+      if (state.theme === "dark") {
+        htmlEl.classList.add("dark");
+      } else {
+        htmlEl.classList.remove("dark");
+      }
+    }
+
+    function applyFontScale() {
+      const promptEl = document.getElementById("q-prompt");
+      const codeEl = document.getElementById("q-code");
+      const expEl = document.getElementById("q-explanation-text");
+      const optionTexts = document.querySelectorAll(".option-text");
+
+      const promptSizes = ["text-sm sm:text-base", "text-base sm:text-lg", "text-lg sm:text-xl", "text-xl sm:text-2xl"];
+      const codeSizes   = ["text-xs sm:text-sm", "text-sm sm:text-[15px]", "text-base sm:text-lg", "text-lg sm:text-xl"];
+      const optSizes    = ["text-xs sm:text-sm", "text-sm sm:text-base", "text-base sm:text-lg", "text-lg sm:text-xl"];
+      const expSizes    = ["text-xs sm:text-sm", "text-sm sm:text-base", "text-base sm:text-lg", "text-lg sm:text-xl"];
+
+      const idx = Math.max(0, Math.min(3, state.fontScale + 1));
+
+      if (promptEl) {
+        promptEl.className = `translatable-en text-left font-semibold text-slate-900 dark:text-slate-50 leading-relaxed mb-4 select-text ${promptSizes[idx]}`;
+      }
+      if (codeEl) {
+        codeEl.className = `translatable-en code-block p-3.5 sm:p-4 overflow-x-auto text-slate-800 dark:text-slate-100 select-text ${codeSizes[idx]}`;
+      }
+      if (expEl) {
+        expEl.className = `text-slate-700 dark:text-slate-200 leading-relaxed space-y-1.5 whitespace-pre-line ${expSizes[idx]}`;
+      }
+      optionTexts.forEach(el => {
+        el.className = `option-text translatable-en text-left font-mono flex-1 select-text ${optSizes[idx]}`;
+      });
+    }
+
+    // ==================== STATS & TOP TABS UI ====================
+    function updateStatsAndBadges() {
+      let correctCount = 0;
+      let wrongCount = 0;
+      const bookmarkCount = Object.keys(state.bookmarks).filter(k => state.bookmarks[k]).length;
+
+      QUESTIONS_DB.forEach(q => {
+        const ans = state.answers[q.id];
+        if (ans) {
+          if (ans === q.correct) correctCount++;
+          else wrongCount++;
+        }
+      });
+
+      const total = QUESTIONS_DB.length;
+      const answered = correctCount + wrongCount;
+      const remaining = total - answered;
+      const accuracy = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
+
+      document.getElementById("stat-correct").textContent = correctCount;
+      document.getElementById("stat-wrong").textContent = wrongCount;
+      document.getElementById("stat-remaining").textContent = remaining;
+      document.getElementById("stat-accuracy").textContent = `${accuracy}%`;
+
+      document.getElementById("bar-correct").style.width = `${(correctCount / total) * 100}%`;
+      document.getElementById("bar-wrong").style.width = `${(wrongCount / total) * 100}%`;
+
+      document.getElementById("badge-wrong").textContent = wrongCount;
+      // Update Mode Tabs Active Styles & Accessibility
+      document.querySelectorAll(".mode-btn").forEach(btn => {
+        const isActive = btn.dataset.mode === state.mode;
+        btn.setAttribute("aria-pressed", String(isActive));
+        btn.className = isActive
+          ? "mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5 bg-emerald-600 text-white shadow-sm"
+          : "mode-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700";
+      });
+
+      // Update Chapter Tabs Active Styles & Accessibility
+      document.querySelectorAll(".chap-btn").forEach(btn => {
+        const isActive = btn.dataset.chapter === String(state.chapterFilter);
+        btn.setAttribute("aria-pressed", String(isActive));
+        btn.className = isActive
+          ? "chap-btn px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition bg-sky-600 text-white shadow-sm"
+          : "chap-btn px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700";
+      });
+
+      // Update Shuffle Button Active Style
+      const shuffleBtn = document.getElementById("btn-shuffle");
+      if (state.shuffled) {
+        shuffleBtn.classList.add("bg-emerald-500/15", "border-emerald-500", "text-emerald-500");
+      } else {
+        shuffleBtn.classList.remove("bg-emerald-500/15", "border-emerald-500", "text-emerald-500");
+      }
+    }
+
+    // ==================== RENDER CURRENT QUESTION ====================
+    function renderApp() {
+      hideTranslationPopover();
+      filteredQuestions = computeFilteredQuestions();
+      updateStatsAndBadges();
+
+      const emptyEl = document.getElementById("empty-state");
+      const cardEl = document.getElementById("question-card");
+      const navCounter = document.getElementById("nav-counter");
+      const btnPrev = document.getElementById("btn-prev");
+      const btnNext = document.getElementById("btn-next");
+      const btnBookmark = document.getElementById("btn-bookmark");
+
+      if (filteredQuestions.length === 0) {
+        cardEl.classList.add("hidden");
+        emptyEl.classList.remove("hidden");
+        navCounter.textContent = "0 / 0";
+        btnPrev.disabled = true;
+        btnNext.disabled = true;
+        btnBookmark.disabled = true;
+
+        const emptyTitle = document.getElementById("empty-title");
+        const emptyDesc = document.getElementById("empty-desc");
+        if (state.mode === "wrong") {
+          emptyTitle.textContent = "رائع! لا توجد أخطاء مسجلة حالياً 🎉";
+          emptyDesc.textContent = "لم تقم بالإجابة بشكل خاطئ على أي سؤال في هذا الفصل.";
+        } else if (state.mode === "bookmarked") {
+          emptyTitle.textContent = "قائمة المراجعة فارغة ⭐";
+          emptyDesc.textContent = "اضغط على زر (تحديد للمراجعة) في الأسفل لحفظ الأسئلة المهمة هنا.";
+        } else {
+          emptyTitle.textContent = "لا توجد أسئلة مطابقة";
+          emptyDesc.textContent = "اختر فصلاً آخر أو اعرض جميع الأسئلة.";
+        }
+        return;
+      }
+
+      emptyEl.classList.add("hidden");
+      cardEl.classList.remove("hidden");
+      btnBookmark.disabled = false;
+
+      // Clamp currentIndex
+      if (state.currentIndex >= filteredQuestions.length) {
+        state.currentIndex = filteredQuestions.length - 1;
+      }
+      if (state.currentIndex < 0) {
+        state.currentIndex = 0;
+      }
+
+      const q = filteredQuestions[state.currentIndex];
+      const userAnswer = state.answers[q.id] || null;
+      const isStudyMode = state.mode === "study";
+      const showSolution = isStudyMode || Boolean(userAnswer);
+
+      // Update Top Badges inside Card
+      document.getElementById("q-id-badge").textContent = q.id;
+      document.getElementById("q-chapter-badge").textContent = q.chapterTitle;
+      document.getElementById("q-topic-badge").textContent = q.topic;
+
+      // Retry button visible only in quiz mode when answered
+      const retryBtn = document.getElementById("btn-retry-question");
+      if (!isStudyMode && userAnswer) {
+        retryBtn.classList.remove("hidden");
+      } else {
+        retryBtn.classList.add("hidden");
+      }
+
+      // Prompt Text
+      document.getElementById("q-prompt").textContent = q.prompt;
+
+      // Code Block
+      const codeWrapper = document.getElementById("q-code-wrapper");
+      const codeEl = document.getElementById("q-code");
+      if (q.code) {
+        codeWrapper.classList.remove("hidden");
+        codeEl.innerHTML = highlightJavaCode(q.code);
+      } else {
+        codeWrapper.classList.add("hidden");
+        codeEl.innerHTML = "";
+      }
+
+      // Render Options
+      const optionsContainer = document.getElementById("q-options");
+      optionsContainer.innerHTML = "";
+
+      Object.entries(q.options).forEach(([key, val]) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dir = "ltr";
+
+        let stateClasses = "border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 hover:border-sky-500/60 hover:bg-sky-500/5";
+        let badgeClasses = "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700";
+        let statusIcon = "";
+
+        if (showSolution) {
+          if (key === q.correct) {
+            stateClasses = "border-emerald-500 bg-emerald-500/15 dark:bg-emerald-500/20 text-emerald-950 dark:text-emerald-100 shadow-sm";
+            badgeClasses = "bg-emerald-500 text-white border-emerald-500";
+            statusIcon = `<span class="text-emerald-600 dark:text-emerald-400 font-extrabold text-base ml-2">✓</span>`;
+          } else if (userAnswer === key && key !== q.correct) {
+            stateClasses = "border-rose-500 bg-rose-500/15 dark:bg-rose-500/20 text-rose-950 dark:text-rose-100";
+            badgeClasses = "bg-rose-500 text-white border-rose-500";
+            statusIcon = `<span class="text-rose-600 dark:text-rose-400 font-extrabold text-base ml-2">✕</span>`;
+          } else {
+            stateClasses = "border-slate-200/70 dark:border-slate-800/70 bg-slate-50/40 dark:bg-slate-900/40 opacity-75";
+          }
+        }
+
+        btn.className = `w-full p-3 sm:p-3.5 rounded-2xl border-2 text-left flex items-center gap-3 select-text transition-all duration-150 ${stateClasses}`;
+
+        btn.innerHTML = `
+          <span class="w-8 h-8 rounded-xl border font-mono font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 transition ${badgeClasses}">
+            ${key}
+          </span>
+          <span class="option-text translatable-en text-left font-mono flex-1 select-text">${escapeHtml(val)}</span>
+          ${statusIcon}
+        `;
+
+        btn.addEventListener("click", (e) => {
+          // Avoid triggering answer selection if user was highlighting text inside the option
+          const sel = window.getSelection();
+          if (sel && sel.toString().trim().length > 0) return;
+
+          if (state.mode === "study") return;
+          state.answers[q.id] = key;
+          saveState();
+          renderApp();
+        });
+
+        optionsContainer.appendChild(btn);
+      });
+
+      // Explanation Card
+      const expBox = document.getElementById("q-explanation-box");
+      const expText = document.getElementById("q-explanation-text");
+      if (showSolution) {
+        expBox.classList.remove("hidden");
+        expText.textContent = q.explanation;
+      } else {
+        expBox.classList.add("hidden");
+      }
+
+      // Bottom Nav Updates
+      navCounter.textContent = `${state.currentIndex + 1} / ${filteredQuestions.length}`;
+      btnPrev.disabled = state.currentIndex === 0;
+      btnNext.disabled = state.currentIndex >= filteredQuestions.length - 1;
+
+      const isBookmarked = Boolean(state.bookmarks[q.id]);
+      const starEl = document.getElementById("bookmark-star");
+      if (isBookmarked) {
+        starEl.textContent = "★";
+        btnBookmark.className = "py-2.5 px-3 sm:px-4 rounded-xl border border-amber-500/50 bg-amber-500/15 text-amber-600 dark:text-amber-300 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition";
+      } else {
+        starEl.textContent = "☆";
+        btnBookmark.className = "py-2.5 px-3 sm:px-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-amber-500/50 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition";
+      }
+
+      applyFontScale();
+      saveState();
+    }
+
+    // ==================== QUICK-JUMP MODAL ====================
+    function openJumpModal() {
+      const modal = document.getElementById("jump-modal");
+      const grid = document.getElementById("jump-grid");
+      const breakdownEl = document.getElementById("chapter-breakdown");
+      grid.innerHTML = "";
+
+      if (breakdownEl) {
+        breakdownEl.innerHTML = [1, 2, 3, 4, 5].map(ch => {
+          const chQuestions = QUESTIONS_DB.filter(q => q.chapter === ch);
+          const chCorrect = chQuestions.filter(q => state.answers[q.id] === q.correct).length;
+          return `
+            <div class="rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700/70 py-1.5 px-1">
+              <div class="text-[10px] font-bold text-slate-500 dark:text-slate-400">Ch ${ch}</div>
+              <div class="font-mono text-xs font-extrabold text-emerald-600 dark:text-emerald-400">${chCorrect}/${chQuestions.length}</div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      filteredQuestions.forEach((q, idx) => {
+        const ans = state.answers[q.id];
+        const isCurrent = idx === state.currentIndex;
+        const isBookmarked = Boolean(state.bookmarks[q.id]);
+
+        let btnStyle = "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700";
+        if (ans) {
+          if (ans === q.correct) {
+            btnStyle = "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/50";
+          } else {
+            btnStyle = "bg-rose-500/20 text-rose-700 dark:text-rose-300 border-rose-500/50";
+          }
+        }
+        if (isCurrent) {
+          btnStyle += " ring-2 ring-sky-500 font-extrabold";
+        }
+
+        const item = document.createElement("button");
+        item.type = "button";
+        item.className = `relative py-2 px-1 rounded-xl border font-mono text-xs font-bold flex items-center justify-center transition hover:scale-105 ${btnStyle}`;
+        item.innerHTML = `
+          <span>${q.id}</span>
+          ${isBookmarked ? '<span class="absolute -top-1.5 -right-1 text-amber-500 text-xs">★</span>' : ""}
+        `;
+        item.addEventListener("click", () => {
+          state.currentIndex = idx;
+          modal.classList.add("hidden");
+          renderApp();
+        });
+        grid.appendChild(item);
+      });
+
+      modal.classList.remove("hidden");
+    }
+
+    // ==================== SELECTION TRANSLATION POPOVER ====================
+    function lookupArabicTranslation(rawSelection) {
+      const cleaned = rawSelection.trim();
+      if (!cleaned) return "لم يتم تحديد نص";
+
+      const normalized = cleaned
+        .toLowerCase()
+        .replace(/^[.,;:!?()"'`]+|[.,;:!?()"'`]+$/g, "")
+        .replace(/\s+/g, " ");
+
+      // 1. Direct full-phrase match
+      if (OFFLINE_DICTIONARY[normalized]) {
+        return OFFLINE_DICTIONARY[normalized];
+      }
+
+      // 2. Word-by-word translation fallback for multi-word selections
+      const words = normalized.split(/[\s_/()-]+/).filter(Boolean);
+      const translatedParts = [];
+      let matchedCount = 0;
+
+      for (let i = 0; i < words.length; i++) {
+        // Try 2-word combination first
+        if (i + 1 < words.length) {
+          const twoWord = `${words[i]} ${words[i + 1]}`;
+          if (OFFLINE_DICTIONARY[twoWord]) {
+            translatedParts.push(OFFLINE_DICTIONARY[twoWord]);
+            matchedCount++;
+            i++;
+            continue;
+          }
+        }
+
+        const w = words[i].replace(/[^a-z0-9'-]/g, "");
+        if (w && OFFLINE_DICTIONARY[w]) {
+          translatedParts.push(OFFLINE_DICTIONARY[w]);
+          matchedCount++;
+        } else if (w) {
+          translatedParts.push(words[i]);
+        }
+      }
+
+      if (matchedCount > 0) {
+        return translatedParts.join(" • ");
+      }
+
+      return "مصطلح برمجي في لغة Java — اضغط على زر Google بالأسفل للترجمة الموسّعة";
+    }
+
+    function showTranslationPopover(rect, rawText) {
+      const popover = document.getElementById("translation-popover");
+      const enEl = document.getElementById("popover-en-text");
+      const arEl = document.getElementById("popover-ar-text");
+      const googleLink = document.getElementById("popover-google-link");
+
+      if (!popover || !enEl || !arEl || !googleLink) return;
+
+      enEl.textContent = rawText;
+      arEl.textContent = lookupArabicTranslation(rawText);
+      googleLink.href = `https://translate.google.com/?sl=en&tl=ar&text=${encodeURIComponent(rawText)}&op=translate`;
+
+      popover.classList.remove("hidden");
+
+      // Position safely within viewport bounds
+      const popRect = popover.getBoundingClientRect();
+      const margin = 12;
+      let left = rect.left + rect.width / 2 - popRect.width / 2;
+      left = Math.max(margin, Math.min(window.innerWidth - popRect.width - margin, left));
+
+      let top = rect.bottom + 10;
+      if (top + popRect.height > window.innerHeight - 72) {
+        top = Math.max(margin, rect.top - popRect.height - 10);
+      }
+
+      popover.style.left = `${left}px`;
+      popover.style.top = `${top}px`;
+    }
+
+    function hideTranslationPopover() {
+      const popover = document.getElementById("translation-popover");
+      if (popover) {
+        popover.classList.add("hidden");
+      }
+    }
+
+    function handleTextSelection() {
+      try {
+        const selection = window.getSelection();
+        if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+          return;
+        }
+
+        const rawText = selection.toString().trim();
+        if (!rawText || rawText.length > 120 || !/[A-Za-z]/.test(rawText)) {
+          return;
+        }
+
+        const anchorNode = selection.anchorNode;
+        const parentEl = anchorNode && anchorNode.nodeType === Node.TEXT_NODE
+          ? anchorNode.parentElement
+          : anchorNode;
+
+        if (!parentEl || !parentEl.closest(".translatable-en")) {
+          return;
+        }
+
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        if (rect.width === 0 && rect.height === 0) {
+          return;
+        }
+
+        showTranslationPopover(rect, rawText);
+      } catch (err) {
+        // Safely ignore range measurement edge cases
+      }
+    }
+
+    // ==================== CLIPBOARD HELPER (IFRAME SAFE) ====================
+    function copyTextFallback(text, labelEl) {
+      try {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        if (labelEl) {
+          const original = labelEl.textContent;
+          labelEl.textContent = "Copied!";
+          setTimeout(() => {
+            labelEl.textContent = original;
+          }, 1500);
+        }
+      } catch (err) {
+        // Ignore clipboard restrictions gracefully
+      }
+    }
+
+    // ==================== INITIALIZATION & EVENT LISTENERS ====================
+    document.addEventListener("DOMContentLoaded", () => {
+      // Mode Switcher Buttons
+      document.querySelectorAll(".mode-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.mode = btn.dataset.mode;
+          state.currentIndex = 0;
+          renderApp();
+        });
+      });
+
+      // Chapter Filter Buttons
+      document.querySelectorAll(".chap-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.chapterFilter = btn.dataset.chapter;
+          state.currentIndex = 0;
+          renderApp();
+        });
+      });
+
+      // Search Input & Clear Button
+      const searchInputEl = document.getElementById("search-input");
+      const clearSearchBtn = document.getElementById("btn-clear-search");
+
+      if (searchInputEl) {
+        searchInputEl.value = state.searchQuery || "";
+        if (state.searchQuery && clearSearchBtn) {
+          clearSearchBtn.classList.remove("hidden");
+        }
+
+        searchInputEl.addEventListener("input", (e) => {
+          state.searchQuery = e.target.value;
+          state.currentIndex = 0;
+          if (clearSearchBtn) {
+            if (state.searchQuery.trim()) {
+              clearSearchBtn.classList.remove("hidden");
+            } else {
+              clearSearchBtn.classList.add("hidden");
+            }
+          }
+          renderApp();
+        });
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener("click", () => {
+          state.searchQuery = "";
+          state.currentIndex = 0;
+          if (searchInputEl) searchInputEl.value = "";
+          clearSearchBtn.classList.add("hidden");
+          renderApp();
+        });
+      }
+
+      // Font Scaling Controls
+      document.getElementById("font-dec").addEventListener("click", () => {
+        state.fontScale = Math.max(-1, state.fontScale - 1);
+        applyFontScale();
+        saveState();
+      });
+
+      document.getElementById("font-reset").addEventListener("click", () => {
+        state.fontScale = 0;
+        applyFontScale();
+        saveState();
+      });
+
+      document.getElementById("font-inc").addEventListener("click", () => {
+        state.fontScale = Math.min(2, state.fontScale + 1);
+        applyFontScale();
+        saveState();
+      });
+
+      // Shuffle Toggle
+      document.getElementById("btn-shuffle").addEventListener("click", () => {
+        state.shuffled = !state.shuffled;
+        if (state.shuffled) {
+          generateShuffleOrder();
+        }
+        state.currentIndex = 0;
+        renderApp();
+      });
+
+      // Theme Toggle
+      document.getElementById("btn-theme").addEventListener("click", () => {
+        state.theme = state.theme === "dark" ? "light" : "dark";
+        applyTheme();
+        saveState();
+      });
+
+      // Reset Modal Controls
+      const resetModal = document.getElementById("reset-modal");
+      document.getElementById("btn-reset-open").addEventListener("click", () => {
+        resetModal.classList.remove("hidden");
+      });
+
+      document.getElementById("btn-reset-cancel").addEventListener("click", () => {
+        resetModal.classList.add("hidden");
+      });
+
+      resetModal.addEventListener("click", (e) => {
+        if (e.target === resetModal) {
+          resetModal.classList.add("hidden");
+        }
+      });
+
+      document.getElementById("btn-reset-confirm").addEventListener("click", () => {
+        state.answers = {};
+        state.bookmarks = {};
+        state.currentIndex = 0;
+        state.mode = "quiz";
+        state.chapterFilter = "all";
+        state.searchQuery = "";
+        if (searchInputEl) searchInputEl.value = "";
+        if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+        resetModal.classList.add("hidden");
+        saveState();
+        renderApp();
+      });
+
+      // Bottom Navigation Controls
+      document.getElementById("btn-prev").addEventListener("click", () => {
+        if (state.currentIndex > 0) {
+          state.currentIndex--;
+          renderApp();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+
+      document.getElementById("btn-next").addEventListener("click", () => {
+        if (state.currentIndex < filteredQuestions.length - 1) {
+          state.currentIndex++;
+          renderApp();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      });
+
+      // Bookmark Toggle
+      document.getElementById("btn-bookmark").addEventListener("click", () => {
+        const currentQ = filteredQuestions[state.currentIndex];
+        if (!currentQ) return;
+        if (state.bookmarks[currentQ.id]) {
+          delete state.bookmarks[currentQ.id];
+        } else {
+          state.bookmarks[currentQ.id] = true;
+        }
+        saveState();
+        renderApp();
+      });
+
+      // Retry Single Question
+      document.getElementById("btn-retry-question").addEventListener("click", () => {
+        const currentQ = filteredQuestions[state.currentIndex];
+        if (!currentQ) return;
+        delete state.answers[currentQ.id];
+        saveState();
+        renderApp();
+      });
+
+      // Copy Code Snippet Button
+      document.getElementById("btn-copy-code").addEventListener("click", () => {
+        const currentQ = filteredQuestions[state.currentIndex];
+        if (!currentQ || !currentQ.code) return;
+        const labelEl = document.getElementById("copy-code-label");
+        copyTextFallback(currentQ.code, labelEl);
+      });
+
+      // Empty State Back Button
+      document.getElementById("btn-back-all").addEventListener("click", () => {
+        state.mode = "quiz";
+        state.chapterFilter = "all";
+        state.searchQuery = "";
+        state.currentIndex = 0;
+        if (searchInputEl) searchInputEl.value = "";
+        if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+        renderApp();
+      });
+
+      // Quick-Jump Modal Controls
+      const jumpModal = document.getElementById("jump-modal");
+      document.getElementById("btn-jump-open").addEventListener("click", openJumpModal);
+      document.getElementById("btn-jump-close").addEventListener("click", () => {
+        jumpModal.classList.add("hidden");
+      });
+      jumpModal.addEventListener("click", (e) => {
+        if (e.target === jumpModal) {
+          jumpModal.classList.add("hidden");
+        }
+      });
+
+      // Translation Popover Close & Selection Events
+      document.getElementById("popover-close-btn").addEventListener("click", hideTranslationPopover);
+
+      document.addEventListener("mouseup", () => {
+        setTimeout(handleTextSelection, 10);
+      });
+
+      document.addEventListener("touchend", () => {
+        setTimeout(handleTextSelection, 60);
+      });
+
+      document.addEventListener("selectionchange", () => {
+        clearTimeout(selectionDebounceTimer);
+        selectionDebounceTimer = setTimeout(() => {
+          const sel = window.getSelection();
+          if (sel && !sel.isCollapsed && sel.toString().trim().length > 0) {
+            handleTextSelection();
+          }
+        }, 180);
+      });
+
+      document.addEventListener("mousedown", (e) => {
+        const popover = document.getElementById("translation-popover");
+        if (popover && !popover.classList.contains("hidden") && !popover.contains(e.target)) {
+          hideTranslationPopover();
+        }
+      });
+
+      // Keyboard Shortcuts (RTL-aware Arrows + 1-4 Options + Escape)
+      document.addEventListener("keydown", (e) => {
+        if (document.activeElement === searchInputEl) return;
+
+        if (e.key === "Escape") {
+          hideTranslationPopover();
+          jumpModal.classList.add("hidden");
+          resetModal.classList.add("hidden");
+          return;
+        }
+
+        if (e.key === "ArrowLeft") {
+          // In RTL layout, Left arrow moves forward to Next question
+          if (state.currentIndex < filteredQuestions.length - 1) {
+            state.currentIndex++;
+            renderApp();
+          }
+        } else if (e.key === "ArrowRight") {
+          // In RTL layout, Right arrow moves back to Previous question
+          if (state.currentIndex > 0) {
+            state.currentIndex--;
+            renderApp();
+          }
+        } else if (["1", "2", "3", "4"].includes(e.key) && state.mode !== "study") {
+          const currentQ = filteredQuestions[state.currentIndex];
+          if (!currentQ) return;
+          const keys = Object.keys(currentQ.options);
+          const chosenKey = keys[Number(e.key) - 1];
+          if (chosenKey) {
+            state.answers[currentQ.id] = chosenKey;
+            saveState();
+            renderApp();
+          }
+        }
+      });
+
+      // Initial Render
+      applyTheme();
+      renderApp();
+    });
+  </script>
+</body>
+</html>
